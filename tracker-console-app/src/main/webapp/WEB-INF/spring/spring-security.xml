@@ -1,0 +1,43 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+
+    <!-- Custom Authentication provider bean -->
+   <!-- <beans:bean id="customAuthenticationProvider"
+                class=""/>
+    <!-- Custom Authentication Handler bean -->
+    <!--<beans:bean id="simpleAuthenticationHandler"
+                class=""/>-->
+
+    <!-- Authentication Manager Declaration -->
+    <!--<authentication-manager id="authenticationManager">
+        <authentication-provider ref="customAuthenticationProvider"/>
+    </authentication-manager>-->
+
+    <!-- Permitir css e js para todos -->
+    <!--<http pattern="/css/**" security="none"/>
+    <http pattern="/js/**" security="none"/>-->
+
+    <!-- Adicionar urls para interceptar-->
+   <!-- <http auto-config="true" use-expressions="true" authentication-manager-ref="authenticationManager">
+        <intercept-url pattern="/resources/**" access="permitAll"/>
+        <intercept-url pattern="/webjars/**" access="permitAll"/>
+
+        <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/home" access="hasAnyRole('', '')"/>
+      />
+-->
+       <!-- <form-login authentication-success-handler-ref="simpleAuthenticationHandler"
+                    login-page="/login"
+                    always-use-default-target="false"
+                    authentication-failure-url="/login?error"/>
+        <logout logout-url="/logout"/>
+
+        <csrf disabled="true"/>
+    </http>-->
+</beans:beans>
