@@ -1,0 +1,27 @@
+*.class
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Eclipse
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+.settings/
+.loadpath
+.project
+.classpath
+.target
+
+# Maven
+target/
+/build/
+.recommenders/
+# Idea
+*.iml
+.idea/
+*.jks
+
