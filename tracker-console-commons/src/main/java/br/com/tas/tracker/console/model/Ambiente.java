@@ -18,8 +18,8 @@ public class Ambiente {
     private String nome;
 
     /**
-     * @param nome
-     * @param id
+     * @param nome - Nome
+     * @param id - Id
      **/
     public Ambiente(Long id, String nome) {
         this.id = id;

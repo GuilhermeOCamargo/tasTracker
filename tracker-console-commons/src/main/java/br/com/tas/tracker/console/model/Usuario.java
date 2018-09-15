@@ -24,11 +24,11 @@ public class Usuario {
     private Permissao permissao;
 
     /**
-     * @param id
-     * @param nome
-     * @param email
-     * @param senha
-     * @param permissao
+     * @param id - Id
+     * @param nome - Nome
+     * @param email - Email
+     * @param senha - Senha
+     * @param permissao - Permissão
      * */
     public Usuario(Long id, String nome, String email, String senha, Permissao permissao) {
         this.id = id;

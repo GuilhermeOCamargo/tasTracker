@@ -17,8 +17,8 @@ public class Permissao {
     private String nome;
 
     /**
-     * @param id
-     * @param nome
+     * @param id - Id
+     * @param nome - Nome
      * */
     public Permissao(Long id, String nome) {
         this.id = id;

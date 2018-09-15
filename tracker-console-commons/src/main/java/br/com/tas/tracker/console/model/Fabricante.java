@@ -17,8 +17,8 @@ public class Fabricante {
     private String nome;
 
     /**
-     * @param id
-     * @param nome
+     * @param id - Id
+     * @param nome - Nome
      * */
     public Fabricante(Long id, String nome) {
         this.id = id;

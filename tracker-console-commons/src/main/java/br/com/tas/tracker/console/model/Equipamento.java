@@ -27,12 +27,12 @@ public class Equipamento {
     private Ambiente ambiente;
 
     /**
-     * @param id
-     * @param modelo
-     * @param hostname
-     * @param numeroSerie
-     * @param tag
-     * @param ambiente
+     * @param id - Id
+     * @param modelo - Modelo
+     * @param hostname - Hostname
+     * @param numeroSerie - NumeroSerie
+     * @param tag - Tag de reconhecimento da antena LORA
+     * @param ambiente - ambiente
      * */
     public Equipamento(Long id, Modelo modelo, String hostname, String numeroSerie, String tag, Ambiente ambiente) {
         this.id = id;

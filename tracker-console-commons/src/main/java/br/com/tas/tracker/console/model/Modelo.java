@@ -20,9 +20,9 @@ public class Modelo {
     private Fabricante fabricante;
 
     /**
-     * @param id
-     * @param nome
-     * @param fabricante
+     * @param id - Id
+     * @param nome - Nome
+     * @param fabricante - Fabricante
      * */
     public Modelo(Long id, String nome, Fabricante fabricante) {
         this.id = id;
