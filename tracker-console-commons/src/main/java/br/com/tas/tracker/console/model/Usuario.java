@@ -7,6 +7,16 @@ import javax.persistence.*;
  * @since 15/09/2018
  * @version 1.0
  **/
+@NamedQueries({
+        /*DELETE BY ID*/
+        @NamedQuery(name = "USUARIO.deleteById", query = "DELETE FROM USUARIO u WHERE u.id = :id"),
+        /*FIND ALL*/
+        @NamedQuery(name = "USUARIO.findAll", query = "SELECT u FROM USUARIO u"),
+        /*FIND BY ID*/
+        @NamedQuery(name = "USUARIO.findById", query = "SELECT u FROM USUARIO u WHERE u.id = :id"),
+        /*FIND BY E-MAIL*/
+        @NamedQuery(name = "USUARIO.findByEmail", query = "SELECT u FROM USUARIO U WHERE u.email = :email")
+})
 @Entity(name = "USUARIO")
 public class Usuario {
     @Id
@@ -37,7 +47,7 @@ public class Usuario {
         this.senha = senha;
         this.permissao = permissao;
     }
-
+    public Usuario(){}
     /*Getters and Setters*/
     public Long getId() {
         return id;

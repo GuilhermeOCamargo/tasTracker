@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Tas Tracker</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+    <div class="wrapper">
+        <c:import url="template_menu.jsp"></c:import>
+        <div class="container">
+            <div class="row">
+                <h1>Usu&aacute;rios</h1>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="row">
+                        <form:form method="POST" action="saveUsuario" modelAttribute="usuario">
+                            <form:hidden  path="id"/>
+                            <div class="form-group">
+                                <form:label path="nome">Nome:</form:label>
+                                <form:input path="nome" type="text" class="form-control" id="nome"/>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="email">Email:</form:label>
+                                <form:input path="email" type="text" class="form-control" id="email"/>
+                            </div>
+                            <div class="form-group">
+                                <form:label path="senha">Senha:</form:label>
+                                <form:input path="senha" type="password" class="form-control" id="senha"/>
+                            </div>
+                            <form:errors path="*" />
+                            <div class="form-group">
+                               <input type="submit" value="Salvar" class="btn btn-primary"/>
+                            </div>
+                        </form:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
