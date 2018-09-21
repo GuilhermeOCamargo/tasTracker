@@ -27,19 +27,42 @@
                     <div class="row">
                         <form:form method="POST" action="saveUsuario" modelAttribute="usuario">
                             <form:hidden  path="id"/>
-                            <div class="form-group">
-                                <form:label path="nome">Nome:</form:label>
-                                <form:input path="nome" type="text" class="form-control" id="nome"/>
-                            </div>
-                            <div class="form-group">
-                                <form:label path="email">Email:</form:label>
-                                <form:input path="email" type="text" class="form-control" id="email"/>
-                            </div>
-                            <div class="form-group">
-                                <form:label path="senha">Senha:</form:label>
-                                <form:input path="senha" type="password" class="form-control" id="senha"/>
-                            </div>
-                            <form:errors path="*" />
+                            <spring:bind path="nome">
+                                <div class="form-group ">
+                                    <form:label path="nome">Nome:</form:label>
+                                    <form:input path="nome" type="text" class="form-control" id="nome"/>
+                                    <div>
+                                        <form:errors path="nome" class="${status.error ? 'alert-danger' : ''}" />
+                                    </div>
+                                </div>
+                            </spring:bind>
+                            <spring:bind path="email">
+                                <div class="form-group">
+                                    <form:label path="email">Email:</form:label>
+                                    <form:input path="email" type="text" class="form-control" id="email"/>
+                                    <div>
+                                        <form:errors path="email" class="${status.error ? 'alert-danger' : ''}" />
+                                    </div>
+                                </div>
+                            </spring:bind>
+                            <spring:bind path="senha">
+                                <div class="form-group">
+                                    <form:label path="senha">Senha:</form:label>
+                                    <form:input path="senha" type="password" class="form-control" id="senha"/>
+                                    <div>
+                                        <form:errors path="senha" class="${status.error ? 'alert-danger' : ''}" />
+                                    </div>
+                                </div>
+                            </spring:bind>
+                            <spring:bind path="confirmSenha">
+                                <div class="form-group">
+                                    <form:label path="confirmSenha">Confirmação Senha:</form:label>
+                                    <form:input path="confirmSenha" type="password" class="form-control" id="confirmSenha"/>
+                                    <div>
+                                        <form:errors path="confirmSenha" class="${status.error ? 'alert-danger' : ''}" />
+                                    </div>
+                                </div>
+                            </spring:bind>
                             <div class="form-group">
                                <input type="submit" value="Salvar" class="btn btn-primary"/>
                             </div>

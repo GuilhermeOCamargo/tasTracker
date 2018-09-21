@@ -9,29 +9,29 @@ import javax.persistence.*;
  **/
 @NamedQueries({
         /*DELETE BY ID*/
-        @NamedQuery(name = "USUARIO.deleteById", query = "DELETE FROM USUARIO u WHERE u.id = :id"),
+        @NamedQuery(name = "USUARIO.deleteById", query = "DELETE FROM Usuario u WHERE u.id = :id"),
         /*FIND ALL*/
-        @NamedQuery(name = "USUARIO.findAll", query = "SELECT u FROM USUARIO u"),
+        @NamedQuery(name = "USUARIO.findAll", query = "SELECT u FROM Usuario u"),
         /*FIND BY ID*/
-        @NamedQuery(name = "USUARIO.findById", query = "SELECT u FROM USUARIO u WHERE u.id = :id"),
+        @NamedQuery(name = "USUARIO.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
         /*FIND BY E-MAIL*/
-        @NamedQuery(name = "USUARIO.findByEmail", query = "SELECT u FROM USUARIO U WHERE u.email = :email")
+        @NamedQuery(name = "USUARIO.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
 })
-@Entity(name = "USUARIO")
+@Entity
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
     private Long id;
-    @Column(name = "NOME", nullable = false, length = 100)
+    @Column(nullable = false, length = 100)
     private String nome;
-    @Column(name = "EMAIL", nullable = false, length = 50, unique = true)
+    @Column(nullable = false, length = 50, unique = true)
     private String email;
-    @Column(name = "SENHA", nullable = false, length = 15)
+    @Column(nullable = false, length = 15)
     private String senha;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "PERMISSAO", nullable = false)
+    @JoinColumn(nullable = false)
     private Permissao permissao;
+    private String confirmSenha;
 
     /**
      * @param id - Id
@@ -87,6 +87,14 @@ public class Usuario {
 
     public void setPermissao(Permissao permissao) {
         this.permissao = permissao;
+    }
+
+    public String getConfirmSenha() {
+        return confirmSenha;
+    }
+
+    public void setConfirmSenha(String confirmSenha) {
+        this.confirmSenha = confirmSenha;
     }
 
     /**

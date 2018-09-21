@@ -13,3 +13,11 @@ p {
     line-height: 1.7em;
     color: #999;
 }
+.error-message{
+    color:#FF0000;
+}
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}

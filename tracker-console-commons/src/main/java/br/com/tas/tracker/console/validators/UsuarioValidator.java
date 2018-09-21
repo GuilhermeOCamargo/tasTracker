@@ -34,6 +34,7 @@ public class UsuarioValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome",getPropertieMessage("error.user.validation.nome.null"));
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", getPropertieMessage("error.user.validation.email.null"));
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "senha",getPropertieMessage("error.user.validation.senha.null"));
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmSenha", getPropertieMessage("error.user.validation.confirmSenha.null"));
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "permissao", getPropertieMessage("error.user.validation.permissao.null"));
 
         if(usuario.getNome().length() > 100){
@@ -51,6 +52,10 @@ public class UsuarioValidator implements Validator {
         if(usuario.getSenha().length() > 15 || usuario.getSenha().length() < 8){
             log.error("Validação senha chars - falhou");
             errors.rejectValue("senha", getPropertieMessage("error.user.validation.senha.chars"));
+        }
+        if(!usuario.getSenha().equals(usuario.getConfirmSenha())){
+            log.error("Validação senha equals - falhou");
+            errors.rejectValue("confirmSenha", getPropertieMessage("error.user.validation.confirmSenha.equals"));
         }
         if(usuario.getPermissao() == null){
             log.error("Validação permissão null - falhou");
