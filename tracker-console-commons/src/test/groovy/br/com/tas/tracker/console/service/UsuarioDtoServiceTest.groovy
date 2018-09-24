@@ -1,50 +1,47 @@
 package br.com.tas.tracker.console.service
 
-import br.com.tas.tracker.console.dao.UsuarioDao
 import br.com.tas.tracker.console.exceptions.UserEmailCharsException
 import br.com.tas.tracker.console.exceptions.UserEmailNullException
-import br.com.tas.tracker.console.exceptions.UserEmailUniqueException
 import br.com.tas.tracker.console.exceptions.UserNomeLimitCharsException
 import br.com.tas.tracker.console.exceptions.UserNomeNullException
 import br.com.tas.tracker.console.exceptions.UserPermissaoNullException
 import br.com.tas.tracker.console.exceptions.UserSenhaCharsException
 import br.com.tas.tracker.console.exceptions.UserSenhaNullException
-import br.com.tas.tracker.console.model.Permissao
-import br.com.tas.tracker.console.model.Usuario
+
 import br.com.tas.tracker.console.services.UsuarioService
 import spock.lang.Specification
 
-class UsuarioServiceTest extends Specification{
+class UsuarioDtoServiceTest extends Specification{
 
     def 'deve testar o método validateFields'(){
         given:
-        Usuario userNomeNulo = new Usuario(1, null, 'guilherme@tas.com',
-                '12345678', new Permissao(1, 'Administrador'))
-        Usuario userNomeChars= new Usuario(1, '111111111111111111111111111111111111111111111111111' +
+        UsuarioDto userNomeNulo = new UsuarioDto(1, null, 'guilherme@tas.com',
+                '12345678', new PermissaoDto(1, 'Administrador'))
+        UsuarioDto userNomeChars= new UsuarioDto(1, '111111111111111111111111111111111111111111111111111' +
                 '11111111111111111111111111111111111111111111111111111111', 'guilherme@tas.com',
-                '1234567890', new Permissao(1, 'Administrador'))
-        Usuario userEmailNulo = new Usuario(1, 'Guilherme', null,
-                '1234567890', new Permissao(1, 'Administrador'))
-        Usuario userEmailChars = new Usuario(1, 'Guilherme', '11111111111111111111111111111111111111111111' +
+                '1234567890', new PermissaoDto(1, 'Administrador'))
+        UsuarioDto userEmailNulo = new UsuarioDto(1, 'Guilherme', null,
+                '1234567890', new PermissaoDto(1, 'Administrador'))
+        UsuarioDto userEmailChars = new UsuarioDto(1, 'Guilherme', '11111111111111111111111111111111111111111111' +
                 '11111111111111111111111111111111111111111111111111111111',
-                '1234567890', new Permissao(1, 'Administrador'))
-        Usuario userEmailUnique = new Usuario(1, 'Guilherme', 'guilherme@tas.com',
-                '1234567890', new Permissao(1, 'Administrador'))
-        Usuario userSenhaNull = new Usuario(1, 'Guilherme', 'guilherme@tas.com',
-                null, new Permissao(1, 'Administrador'))
-        Usuario userSenhaCharsMenor = new Usuario(1, 'Guilherme', 'guilherme@tas.com',
-                '1234', new Permissao(1, 'Administrador'))
-        Usuario userSenhaCharsMaior = new Usuario(1, 'Guilherme', 'guilherme@tas.com',
-                '1234567890123456', new Permissao(1, 'Administrador'))
-        Usuario userPermissaoNull = new Usuario(1, 'Guilherme', 'guilherme@tas.com',
+                '1234567890', new PermissaoDto(1, 'Administrador'))
+        UsuarioDto userEmailUnique = new UsuarioDto(1, 'Guilherme', 'guilherme@tas.com',
+                '1234567890', new PermissaoDto(1, 'Administrador'))
+        UsuarioDto userSenhaNull = new UsuarioDto(1, 'Guilherme', 'guilherme@tas.com',
+                null, new PermissaoDto(1, 'Administrador'))
+        UsuarioDto userSenhaCharsMenor = new UsuarioDto(1, 'Guilherme', 'guilherme@tas.com',
+                '1234', new PermissaoDto(1, 'Administrador'))
+        UsuarioDto userSenhaCharsMaior = new UsuarioDto(1, 'Guilherme', 'guilherme@tas.com',
+                '1234567890123456', new PermissaoDto(1, 'Administrador'))
+        UsuarioDto userPermissaoNull = new UsuarioDto(1, 'Guilherme', 'guilherme@tas.com',
                 '12345678', null)
         /*INSTANCIANDO O SERVICE*/
         def service = new UsuarioService()
         /*CRIANDO MOCK DO DAO*//*
         UsuarioDao dao = Mock()
         //definindo os comportamentos
-        dao.findByEmail('guilherme@tas.com') >> new Usuario(1, 'Guilherme', 'guilherme@tas.com',
-                '1234', new Permissao(1, 'Administrador'))
+        dao.findByEmail('guilherme@tas.com') >> new UsuarioDto(1, 'Guilherme', 'guilherme@tas.com',
+                '1234', new PermissaoDto(1, 'Administrador'))
         *//*ATRIBUINDO O MOCK AO SERVICE*//*
         service.userDao = dao*/
 

@@ -1,7 +1,7 @@
 package br.com.tas.tracker.console.dao;
 
 import br.com.tas.tracker.console.Util.HibernateUtil;
-import br.com.tas.tracker.console.model.Usuario;
+import br.com.tas.tracker.console.model.dto.Usuario;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
@@ -18,14 +18,14 @@ import java.util.List;
 public class UsuarioDao implements DaoInterface<Usuario> {
 
     @Override
-    public boolean insert(Usuario usuario) {
+    public boolean insert(Usuario usuarioDto) {
         Session session = null;
         Transaction tx = null;
         boolean isCompleted = false;
         try{
             session = HibernateUtil.openSession();
             tx = session.beginTransaction();
-            session.save(usuario);
+            session.save(usuarioDto);
             tx.commit();
             isCompleted = true;
         }catch (RuntimeException e){
@@ -43,14 +43,14 @@ public class UsuarioDao implements DaoInterface<Usuario> {
     }
 
     @Override
-    public boolean update(Usuario usuario) {
+    public boolean update(Usuario usuarioDto) {
         Session session = null;
         Transaction tx = null;
         boolean isCompleted = false;
         try{
             session = HibernateUtil.openSession();
             tx = session.beginTransaction();
-            session.update(usuario);
+            session.update(usuarioDto);
             tx.commit();
             isCompleted = true;
         }catch (RuntimeException e){
@@ -68,14 +68,14 @@ public class UsuarioDao implements DaoInterface<Usuario> {
     }
 
     @Override
-    public boolean delete(Usuario usuario) {
+    public boolean delete(Usuario usuarioDto) {
         Session session = null;
         Transaction tx = null;
         boolean isCompleted = false;
         try{
             session = HibernateUtil.openSession();
             tx = session.beginTransaction();
-            session.delete(usuario);
+            session.delete(usuarioDto);
             tx.commit();
             isCompleted = true;
         }catch (RuntimeException e){

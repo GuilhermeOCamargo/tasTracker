@@ -25,12 +25,13 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="row">
-                        <form:form method="POST" action="saveUsuario" modelAttribute="usuario">
+                        <form:form method="POST" action="saveUsuario" modelAttribute="usuarioForm">
                             <form:hidden  path="id"/>
                             <spring:bind path="nome">
                                 <div class="form-group ">
                                     <form:label path="nome">Nome:</form:label>
-                                    <form:input path="nome" type="text" class="form-control" id="nome"/>
+                                    <form:input path="nome" type="text" class="form-control" id="nome"
+                                    value="${usuario.nome}"/>
                                     <div>
                                         <form:errors path="nome" class="${status.error ? 'alert-danger' : ''}" />
                                     </div>
@@ -39,7 +40,8 @@
                             <spring:bind path="email">
                                 <div class="form-group">
                                     <form:label path="email">Email:</form:label>
-                                    <form:input path="email" type="text" class="form-control" id="email"/>
+                                    <form:input path="email" type="text" class="form-control" id="email"
+                                    value="${usuario.email}"/>
                                     <div>
                                         <form:errors path="email" class="${status.error ? 'alert-danger' : ''}" />
                                     </div>
@@ -63,11 +65,42 @@
                                     </div>
                                 </div>
                             </spring:bind>
+                            <spring:bind path="permissao">
+                                <div class="form-group">
+                                    <form:label path="permissao">Permissão:</form:label>
+                                    <form:select path="permissao" class="form-control">
+                                        <form:options items="${permissoes}" itemValue="id" itemLabel="nome"
+                                        selected="${usuario.permissao.id eq id ? 'selected':''}"/>
+                                    </form:select>
+                                    <div>
+                                        <form:errors path="permissao" class="${status.error ? 'alert-danger' : ''}" />
+                                    </div>
+                                </div>
+                            </spring:bind>
                             <div class="form-group">
                                <input type="submit" value="Salvar" class="btn btn-primary"/>
                             </div>
                         </form:form>
                     </div>
+                </div>
+                <div class="col-sm-8">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Permissao</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableAudit">
+                            <c:forEach items="${usuarios}" var="user">
+                                <td>${user.nome}</td>
+                                <td>${user.email}</td>
+                                <td>${user.permissao.nome}</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

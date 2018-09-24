@@ -1,8 +1,7 @@
 package br.com.tas.tracker.console.services;
 
 import br.com.tas.tracker.console.dao.UsuarioDao;
-import br.com.tas.tracker.console.exceptions.*;
-import br.com.tas.tracker.console.model.Usuario;
+import br.com.tas.tracker.console.model.dto.Usuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +21,17 @@ public class UsuarioService {
     private UsuarioDao userDao;
 
     private boolean insert(Usuario usuario) {
-        log.info("Inserindo usuário: "+usuario.getNome());
+        log.info("Inserindo usuário: "+ usuario.getNome());
         return userDao.insert(usuario);
     }
 
     private boolean update(Usuario usuario) {
-        log.info("Alterando usuário: "+usuario.getNome());
+        log.info("Alterando usuário: "+ usuario.getNome());
         return userDao.update(usuario);
     }
 
     public boolean delete(Usuario usuario) {
-        log.info("Deletando usuário: "+usuario.getNome());
+        log.info("Deletando usuário: "+ usuario.getNome());
         return userDao.delete(usuario);
     }
 
@@ -60,7 +59,6 @@ public class UsuarioService {
      * @param usuario - Usuário a ser salvo no banco
      * */
     public boolean save(Usuario usuario) {
-        validateFields(usuario);
         if(usuario.getId() == null){
             return insert(usuario);
         }else{
@@ -72,7 +70,7 @@ public class UsuarioService {
      * @param usuario - Usuário a ser validado
      * Verifica se todos os campos estão de acordo com as regras estabelecidas
      * */
-    private void validateFields(Usuario usuario) {
+    /*private void validateFields(usuario usuario) {
         log.info("Validando todos os campos do usuário");
         if(usuario.getNome() == null){
             log.error("Validação nome null - falhou");
@@ -94,10 +92,10 @@ public class UsuarioService {
             throw new UserEmailCharsException();
         }
         log.info("Validação email chars - OK");
-       /* if(findByEmail(usuario.getEmail()) != null){
+       *//* if(findByEmail(usuario.getEmail()) != null){
             log.error("Validação email unique - falhou");
             throw new UserEmailUniqueException();
-        }*/
+        }*//*
         log.info("Validação email unique - OK");
         if(usuario.getSenha() == null){
             log.error("Validação senha null - falhou");
@@ -114,6 +112,6 @@ public class UsuarioService {
             throw new UserPermissaoNullException();
         }
         log.info("Validação permissão null - OK");
-    }
+    }*/
 
 }

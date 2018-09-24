@@ -1,10 +1,9 @@
 package br.com.tas.tracker.console.dao
 
-import br.com.tas.tracker.console.model.Permissao
-import br.com.tas.tracker.console.model.Usuario
+
 import spock.lang.Specification
 
-class UsuarioRepositoryTest extends Specification{
+class UsuarioDtoRepositoryTest extends Specification{
 
     def 'criação de mocks'(){
         given:
@@ -12,10 +11,10 @@ class UsuarioRepositoryTest extends Specification{
         def repository = Mock(UsuarioDao)
 
         //definindo os comportamentos
-        repository.findById(1) >> new Usuario(1, 'Guilherme', 'guilherme@tas.com',
-                '1234', new Permissao(1, 'Administrador'))
-        repository.findById(2) >> new Usuario(2, 'Ana', 'ana@tas.com',
-                '1234', new Permissao(2, 'Visualizador'))
+        repository.findById(1) >> new UsuarioDto(1, 'Guilherme', 'guilherme@tas.com',
+                '1234', new PermissaoDto(1, 'Administrador'))
+        repository.findById(2) >> new UsuarioDto(2, 'Ana', 'ana@tas.com',
+                '1234', new PermissaoDto(2, 'Visualizador'))
 
         when:
         def usuario1 = repository.findById(1)

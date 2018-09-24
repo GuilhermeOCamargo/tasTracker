@@ -1,6 +1,11 @@
-package br.com.tas.tracker.console.model;
+package br.com.tas.tracker.console.model.dto;
+
+import br.com.tas.tracker.console.validators.annotations.EmailUniqueValid;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 /**
  * @author guilherme.camargo
@@ -31,22 +36,21 @@ public class Usuario {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(nullable = false)
     private Permissao permissao;
-    private String confirmSenha;
+
 
     /**
      * @param id - Id
      * @param nome - Nome
      * @param email - Email
      * @param senha - Senha
-     * @param permissao - Permissão
      * */
-    public Usuario(Long id, String nome, String email, String senha, Permissao permissao) {
+    public Usuario(Long id, String nome, String email, String senha) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.permissao = permissao;
     }
+
     public Usuario(){}
     /*Getters and Setters*/
     public Long getId() {
@@ -81,20 +85,13 @@ public class Usuario {
         this.senha = senha;
     }
 
+
     public Permissao getPermissao() {
         return permissao;
     }
 
     public void setPermissao(Permissao permissao) {
         this.permissao = permissao;
-    }
-
-    public String getConfirmSenha() {
-        return confirmSenha;
-    }
-
-    public void setConfirmSenha(String confirmSenha) {
-        this.confirmSenha = confirmSenha;
     }
 
     /**
@@ -113,4 +110,5 @@ public class Usuario {
     public boolean equals(Object obj) {
         return (getId() == ((Usuario)obj).getId() ? true:false);
     }
+
 }

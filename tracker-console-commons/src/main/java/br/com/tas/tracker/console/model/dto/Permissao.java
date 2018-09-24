@@ -1,4 +1,4 @@
-package br.com.tas.tracker.console.model;
+package br.com.tas.tracker.console.model.dto;
 
 import javax.persistence.*;
 
@@ -7,13 +7,19 @@ import javax.persistence.*;
  * @since 15/09/2018
  * @version 1.0
  **/
-@Entity(name = "PERMISSAO")
-public class Permissao {
+
+@NamedQueries({
+        @NamedQuery(name = "PERMISSAO.findAll", query = "SELECT p FROM Permissao p"),
+        @NamedQuery(name = "PERMISSAO.findById", query = "SELECT p FROM Permissao p WHERE p.id = :id")
+})
+
+@Entity
+public class Permissao{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column
     private Long id;
-    @Column(name = "NOME", nullable = false, unique = true, length = 50)
+    @Column(nullable = false, unique = true, length = 50)
     private String nome;
 
     /**
@@ -24,7 +30,7 @@ public class Permissao {
         this.id = id;
         this.nome = nome;
     }
-
+    public Permissao(){}
     /*Getters and Setters*/
     public Long getId() {
         return id;
@@ -53,4 +59,5 @@ public class Permissao {
     public boolean equals(Object obj) {
         return (getId() == ((Permissao)obj).getId() ? true:false);
     }
+
 }

@@ -130,7 +130,8 @@ public class MessageUtil {
         Properties properties = new Properties();
 
         try {
-            FileInputStream input = new FileInputStream(System.getProperty("tracker.propertiesDir") + nomeArquivo);
+            FileInputStream input = new FileInputStream(System.getProperty("tracker" +
+                    ".propertiesDir") + nomeArquivo);
             properties.load(new InputStreamReader(input, Charset.forName("UTF-8")));
         } catch (Exception e) {
             e.printStackTrace();
