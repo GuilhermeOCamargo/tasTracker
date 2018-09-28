@@ -13,12 +13,13 @@ import java.lang.annotation.Target;
  * @since 23/09/2018
  * @version 1.0
  * */
-@Target({ElementType.FIELD})
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = EmailUniqueValidator.class)
 public @interface EmailUniqueValid {
-    String message()default ""/*"E-mail Cadastrado."*/;
+    String message()default "E-mail já Cadastrado.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default{};
-    String value() default "";
+    String email() default "";
+    String id() default "";
 }

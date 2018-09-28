@@ -14,61 +14,53 @@ import javax.validation.constraints.Size;
  * @author guilherme.camargo
  * @since 24/09/2018
  * @version 1.0
- * */
+     * */
 @ConfirmSenhaEqualsValid.List({
         @ConfirmSenhaEqualsValid(senha = "senha", confirmSenha = "confirmSenha")
 })
-public class UsuarioForm {
+@EmailUniqueValid(email = "email", id = "id")
+public class UsuarioForm extends Usuario {
 
-    private Long id;
-    @NotEmpty
-    @Size(min = 1, max = 100)
-    private String nome;
-    @NotEmpty
-    @Size(min = 1, max = 50)
-    @Email
-    @EmailUniqueValid(message = "{Unique.usuario.email}")
-    private String email;
-    @NotEmpty
-    @Size(min = 1, max = 15)
-    private String senha;
-    @NotNull
     private String confirmSenha;
-    @NotNull
-    private Long permissao;
+
+    private Long permissaoId;
 
     public Long getId() {
-        return id;
+        return super.getId();
     }
 
     public void setId(Long id) {
-        this.id = id;
+        super.setId(id);
     }
-
+    @NotEmpty
+    @Size(min = 1, max = 100)
     public String getNome() {
-        return nome;
+        return super.getNome();
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        super.setNome(nome);
     }
-
+    @NotEmpty
+    @Size(min = 1, max = 50)
+    @Email
     public String getEmail() {
-        return email;
+        return super.getEmail();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        super.setEmail(email);
     }
-
+    @NotEmpty
+    @Size(min = 1, max = 15)
     public String getSenha() {
-        return senha;
+        return super.getSenha();
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        super.setSenha(senha);
     }
-
+    @NotNull
     public String getConfirmSenha() {
         return confirmSenha;
     }
@@ -76,13 +68,13 @@ public class UsuarioForm {
     public void setConfirmSenha(String confirmSenha) {
         this.confirmSenha = confirmSenha;
     }
-
-    public Long getPermissao() {
-        return permissao;
+    @NotNull
+    public Long getPermissaoId() {
+        return this.permissaoId;
     }
 
-    public void setPermissao(Long permissao) {
-        this.permissao = permissao;
+    public void setPermissaoId(Long permissaoId) {
+        this.permissaoId = permissaoId;
     }
 
     @Override

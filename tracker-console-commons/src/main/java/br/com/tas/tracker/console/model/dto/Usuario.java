@@ -1,11 +1,7 @@
 package br.com.tas.tracker.console.model.dto;
-
-import br.com.tas.tracker.console.validators.annotations.EmailUniqueValid;
+import br.com.tas.tracker.console.model.form.UsuarioForm;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 /**
  * @author guilherme.camargo
@@ -16,7 +12,7 @@ import javax.validation.constraints.Size;
         /*DELETE BY ID*/
         @NamedQuery(name = "USUARIO.deleteById", query = "DELETE FROM Usuario u WHERE u.id = :id"),
         /*FIND ALL*/
-        @NamedQuery(name = "USUARIO.findAll", query = "SELECT u FROM Usuario u"),
+        @NamedQuery(name = "USUARIO.findAll", query = "SELECT u FROM Usuario u ORDER BY nome"),
         /*FIND BY ID*/
         @NamedQuery(name = "USUARIO.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
         /*FIND BY E-MAIL*/
@@ -111,4 +107,14 @@ public class Usuario {
         return (getId() == ((Usuario)obj).getId() ? true:false);
     }
 
+    public UsuarioForm toForm(){
+        UsuarioForm usuarioForm = new UsuarioForm();
+        usuarioForm.setId(this.getId());
+        usuarioForm.setNome(this.getNome());
+        usuarioForm.setEmail(this.getEmail());
+        usuarioForm.setPermissaoId(this.getPermissao().getId());
+        usuarioForm.setSenha(this.getSenha());
+        usuarioForm.setConfirmSenha(this.getSenha());
+        return usuarioForm;
+    }
 }

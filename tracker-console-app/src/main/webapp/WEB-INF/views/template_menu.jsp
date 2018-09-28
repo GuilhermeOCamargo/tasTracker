@@ -12,7 +12,7 @@
           <li><a href="#">Computadores</a></li>
         </ul>
       </li>
-      <li><a href="#">Usu&aacute;rios</a></li>
+      <li><a href="${pageContext.servletContext.contextPath}/usuario/list">Usu&aacute;rios</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
