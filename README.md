@@ -1,2 +1,2 @@
 # tasTracker
-Sistema de cadastro e rastreamento de ativos(inicialmente apenas notebooks e workstations).
+Sistema que valida a maturidadde de uma empresa para receber um projeto IOT.

@@ -1,4 +1,5 @@
-package br.com.tas.tracker.console.model;
+package br.com.tas.tracker.console.model.dto;
+import br.com.tas.tracker.console.model.form.UsuarioForm;
 
 import javax.persistence.*;
 
@@ -7,37 +8,46 @@ import javax.persistence.*;
  * @since 15/09/2018
  * @version 1.0
  **/
-@Entity(name = "USUARIO")
+@NamedQueries({
+        /*DELETE BY ID*/
+        @NamedQuery(name = "USUARIO.deleteById", query = "DELETE FROM Usuario u WHERE u.id = :id"),
+        /*FIND ALL*/
+        @NamedQuery(name = "USUARIO.findAll", query = "SELECT u FROM Usuario u ORDER BY nome"),
+        /*FIND BY ID*/
+        @NamedQuery(name = "USUARIO.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
+        /*FIND BY E-MAIL*/
+        @NamedQuery(name = "USUARIO.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
+})
+@Entity
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
     private Long id;
-    @Column(name = "NOME", nullable = false, length = 100)
+    @Column(nullable = false, length = 100)
     private String nome;
-    @Column(name = "EMAIL", nullable = false, length = 50, unique = true)
+    @Column(nullable = false, length = 50, unique = true)
     private String email;
-    @Column(name = "SENHA", nullable = false, length = 15)
+    @Column(nullable = false, length = 15)
     private String senha;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "PERMISSAO", nullable = false)
+    @JoinColumn(nullable = false)
     private Permissao permissao;
+
 
     /**
      * @param id - Id
      * @param nome - Nome
      * @param email - Email
      * @param senha - Senha
-     * @param permissao - Permissão
      * */
-    public Usuario(Long id, String nome, String email, String senha, Permissao permissao) {
+    public Usuario(Long id, String nome, String email, String senha) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.permissao = permissao;
     }
 
+    public Usuario(){}
     /*Getters and Setters*/
     public Long getId() {
         return id;
@@ -71,6 +81,7 @@ public class Usuario {
         this.senha = senha;
     }
 
+
     public Permissao getPermissao() {
         return permissao;
     }
@@ -94,5 +105,16 @@ public class Usuario {
     @Override
     public boolean equals(Object obj) {
         return (getId() == ((Usuario)obj).getId() ? true:false);
+    }
+
+    public UsuarioForm toForm(){
+        UsuarioForm usuarioForm = new UsuarioForm();
+        usuarioForm.setId(this.getId());
+        usuarioForm.setNome(this.getNome());
+        usuarioForm.setEmail(this.getEmail());
+        usuarioForm.setPermissaoId(this.getPermissao().getId());
+        usuarioForm.setSenha(this.getSenha());
+        usuarioForm.setConfirmSenha(this.getSenha());
+        return usuarioForm;
     }
 }

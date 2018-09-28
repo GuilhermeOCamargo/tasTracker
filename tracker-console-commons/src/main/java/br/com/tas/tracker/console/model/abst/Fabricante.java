@@ -1,4 +1,4 @@
-package br.com.tas.tracker.console.model;
+package br.com.tas.tracker.console.model.abst;
 
 import javax.persistence.*;
 
@@ -7,13 +7,13 @@ import javax.persistence.*;
  * @since 15/09/2018
  * @version 1.0
  **/
-@Entity(name = "FABRICANTE")
+@Entity
 public class Fabricante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column
     private Long id;
-    @Column(name = "NOME", nullable = false, unique = true, length = 50)
+    @Column(nullable = false, unique = true, length = 50)
     private String nome;
 
     /**

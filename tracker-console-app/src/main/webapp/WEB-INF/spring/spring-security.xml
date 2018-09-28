@@ -9,7 +9,7 @@
     <!-- Custom Authentication provider bean -->
    <!-- <beans:bean id="customAuthenticationProvider"
                 class=""/>
-    <!-- Custom Authentication Handler bean -->
+    Custom Authentication Handler bean -->
     <!--<beans:bean id="simpleAuthenticationHandler"
                 class=""/>-->
 

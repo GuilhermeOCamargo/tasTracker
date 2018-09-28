@@ -1,4 +1,4 @@
-package br.com.tas.tracker.console.model;
+package br.com.tas.tracker.console.model.abst;
 
 import javax.persistence.*;
 
@@ -7,23 +7,23 @@ import javax.persistence.*;
  * @since 15/09/2018
  * @version 1.0
  **/
-@Entity(name = "EQUIPAMENTO")
+@Entity
 public class Equipamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column
     private Long id;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "MODELO", nullable = false)
+    @JoinColumn(nullable = false)
     private Modelo modelo;
-    @Column(name = "HOSTNAME", nullable = false, length = 50, unique = true)
+    @Column(nullable = false, length = 50, unique = true)
     private String hostname;
-    @Column(name = "NUMEROSERIE", nullable = false, length = 50, unique = true)
+    @Column(nullable = false, length = 50, unique = true)
     private String numeroSerie;
-    @Column(name = "TAG", nullable = false, length = 50, unique = true)
+    @Column(nullable = false, length = 50, unique = true)
     private String tag;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "AMBIENTE", nullable = false)
+    @JoinColumn(nullable = false)
     private Ambiente ambiente;
 
     /**
