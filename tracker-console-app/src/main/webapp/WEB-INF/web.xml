@@ -30,7 +30,13 @@
         <servlet-name>appServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
+    <!--Configuração do arquivo de mensagens-->
+    <context-param>
+        <param-name>
+            javax.servlet.jsp.jstl.fmt.localizationContext
+        </param-name>
+        <param-value>messages</param-value>
+    </context-param>
     <!-- Prior to Servlet 3.0 define either an error-code or an exception-type but not both -->
 
     <!-- Declaration of Spring Security Filters -->

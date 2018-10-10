@@ -40,7 +40,7 @@ public class UsuarioController {
         model = prepareForm(model, usuarioForm);
         model.addAttribute("css", css);
         model.addAttribute("mensagem", mensagem);
-        return "usuario";
+        return "main";
     }
     /**
      * Salva o usuário
@@ -51,7 +51,7 @@ public class UsuarioController {
         if(result.hasErrors()){
             logger.error("Erros encontrados: "+ result.getErrorCount());
             model = prepareForm(model, usuarioForm);
-            return "usuario";
+            return "main";
         }
         try{
             Usuario usuario = usuarioForm.build(permissaoService.findById(usuarioForm.getPermissaoId()));
@@ -67,7 +67,7 @@ public class UsuarioController {
         model = prepareForm(model, usuarioForm);
         redirectAttributes.addFlashAttribute("css", "error");
         redirectAttributes.addFlashAttribute("mensagem", "Erro ao salvar.");
-        return "usuario";
+        return "main";
     }
     /**
      * Prepara o usuário para ser editado
@@ -89,7 +89,7 @@ public class UsuarioController {
             return "forward:usuario";
         }
         model = prepareForm(model, usuario.toForm());
-        return "usuario";
+        return "main";
     }
     /**
      * Chama o modal de confirmação de deleção
@@ -130,7 +130,7 @@ public class UsuarioController {
         model.addAttribute("usuarioForm", (usuarioForm == null ? new UsuarioForm():usuarioForm));
         model.addAttribute("usuarios", userService.findAll());
         model.addAttribute("permissoes", permissaoService.findAll());
-
+        model.addAttribute("urlBody", "usuario");
         return model;
     }
 }
