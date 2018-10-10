@@ -1,0 +1,65 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+.borda-solida{
+    border-bottom: 1px solid #000;
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    background: #0B0B3B;
+    color: #FFFFFF
+}
+.borda-inf{
+    font-weight: bold;
+    border-bottom: 1px solid #000;
+}
+.borda-sup{
+    font-weight: bold;
+    border-top: 1px solid #000;
+}
+.subtitulo{
+    color: #848484;
+}
+.sessao-color{
+background: #F5F5F5;
+}
+.legend.active {
+  color: #58ACFA;
+}
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
