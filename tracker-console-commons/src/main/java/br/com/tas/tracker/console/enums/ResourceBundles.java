@@ -4,7 +4,7 @@ public enum ResourceBundles {
 
     HIBERNATE_CONSOLE("hibernate-console.properties"),
     MENU_CONSOLE("tracker-console.properties"),
-    MESSAGES("messages_pt.properties");
+    MESSAGES("messages.properties");
 
     private String desc;
 

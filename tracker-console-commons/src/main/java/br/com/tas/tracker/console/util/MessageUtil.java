@@ -1,4 +1,4 @@
-package br.com.tas.tracker.console.Util;
+package br.com.tas.tracker.console.util;
 
 
 import br.com.tas.tracker.console.enums.ResourceBundles;

@@ -1,6 +1,6 @@
 package br.com.tas.tracker.console.dao;
 
-import br.com.tas.tracker.console.Util.HibernateUtil;
+import br.com.tas.tracker.console.util.HibernateUtil;
 import br.com.tas.tracker.console.model.dto.Permissao;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
