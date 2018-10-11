@@ -10,7 +10,8 @@ import javax.persistence.*;
 
 @NamedQueries({
         @NamedQuery(name = "PERMISSAO.findAll", query = "SELECT p FROM Permissao p"),
-        @NamedQuery(name = "PERMISSAO.findById", query = "SELECT p FROM Permissao p WHERE p.id = :id")
+        @NamedQuery(name = "PERMISSAO.findById", query = "SELECT p FROM Permissao p WHERE p.id = :id"),
+        @NamedQuery(name = "PERMISSAO.findByName", query = "SELECT p FROM Permissao p WHERE p.nome = :nome")
 })
 
 @Entity

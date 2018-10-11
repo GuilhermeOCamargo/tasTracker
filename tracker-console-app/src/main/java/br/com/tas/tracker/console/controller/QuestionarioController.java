@@ -40,13 +40,14 @@ public class QuestionarioController {
         return "redirect:form";
     }
 
-    private Model prepareForm(Model model, QuestionarioForm questionarioForm){
+    private void prepareForm(Model model, QuestionarioForm questionarioForm){
         QuestionarioForm questionario = (questionarioForm == null ? new QuestionarioForm():questionarioForm);
        /* questionario.setAtivosDevicesForm((questionario.getAtivosDevicesForm() == null?
                 new AtivosDevicesForm():questionario.getAtivosDevicesForm()));*/
         model.addAttribute("questionarioForm", questionario);
-        model.addAttribute("urlBody", "questionarioForm");
-        return model;
+        model.addAttribute("urlBody", "questionario");
+        model.addAttribute("pageTitle", "Questionário");
+
     }
 
 }

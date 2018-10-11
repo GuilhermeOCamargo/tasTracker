@@ -6,12 +6,9 @@
 
     <session-factory>
         <!-- Class Mappings -->
-        <!--<mapping class="br.com.tas.tracker.console.model.abstt.Ambiente"></mapping>
-        <mapping class="br.com.tas.tracker.console.model.abstt.Equipamento"></mapping>
-        <mapping class="br.com.tas.tracker.console.model.abstt.Fabricante"></mapping>
-        <mapping class="br.com.tas.tracker.console.model.abstt.Modelo"></mapping>-->
         <mapping class="br.com.tas.tracker.console.model.dto.Permissao"></mapping>
         <mapping class="br.com.tas.tracker.console.model.dto.Usuario"></mapping>
+        <mapping class="br.com.tas.tracker.console.model.dto.Empresa"></mapping>
     </session-factory>
 
 </hibernate-configuration>

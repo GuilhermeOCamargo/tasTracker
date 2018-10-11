@@ -1,32 +1,24 @@
 package br.com.tas.tracker.console.dao;
 
-import br.com.tas.tracker.console.model.dto.Permissao;
+import br.com.tas.tracker.console.model.dto.Empresa;
 import br.com.tas.tracker.console.util.HibernateUtil;
-import br.com.tas.tracker.console.model.dto.Usuario;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
 import java.util.List;
-
-/**
- * @author guilherme.camargo
- * @since 17/09/2018
- * @version 1.0
- * */
 @Repository
-public class UsuarioDao implements DaoInterface<Usuario> {
-
+public class EmpresaDao implements DaoInterface<Empresa> {
     @Override
-    public boolean insert(Usuario usuarioDto) {
+    public boolean insert(Empresa empresa) {
         Session session = null;
         Transaction tx = null;
         boolean isCompleted = false;
         try{
             session = HibernateUtil.openSession();
             tx = session.beginTransaction();
-            session.save(usuarioDto);
+            session.save(empresa);
             tx.commit();
             isCompleted = true;
         }catch (RuntimeException e){
@@ -44,14 +36,14 @@ public class UsuarioDao implements DaoInterface<Usuario> {
     }
 
     @Override
-    public boolean update(Usuario usuarioDto) {
+    public boolean update(Empresa empresa) {
         Session session = null;
         Transaction tx = null;
         boolean isCompleted = false;
         try{
             session = HibernateUtil.openSession();
             tx = session.beginTransaction();
-            session.update(usuarioDto);
+            session.update(empresa);
             tx.commit();
             isCompleted = true;
         }catch (RuntimeException e){
@@ -69,14 +61,14 @@ public class UsuarioDao implements DaoInterface<Usuario> {
     }
 
     @Override
-    public boolean delete(Usuario usuarioDto) {
+    public boolean delete(Empresa empresa) {
         Session session = null;
         Transaction tx = null;
         boolean isCompleted = false;
         try{
             session = HibernateUtil.openSession();
             tx = session.beginTransaction();
-            session.delete(usuarioDto);
+            session.delete(empresa);
             tx.commit();
             isCompleted = true;
         }catch (RuntimeException e){
@@ -101,7 +93,7 @@ public class UsuarioDao implements DaoInterface<Usuario> {
         try {
             session = HibernateUtil.openSession();
             tx = session.beginTransaction();
-            session.getNamedQuery("USUARIO.deleteById").setParameter("id", id).executeUpdate();
+            session.getNamedQuery("EMPRESA.deleteById").setParameter("id", id).executeUpdate();
             tx.commit();
             isCompleted = true;
         }catch (RuntimeException e) {
@@ -119,11 +111,11 @@ public class UsuarioDao implements DaoInterface<Usuario> {
     }
 
     @Override
-    public List<Usuario> findAll() {
+    public List<Empresa> findAll() {
         Session session = null;
         try {
             session = HibernateUtil.openSession();
-            return session.getNamedQuery("USUARIO.findAll").list();
+            return session.getNamedQuery("EMPRESA.findAll").list();
         }catch (NoResultException e) {
             return null;
         }finally {
@@ -134,11 +126,11 @@ public class UsuarioDao implements DaoInterface<Usuario> {
     }
 
     @Override
-    public Usuario findById(Long id) {
+    public Empresa findById(Long id) {
         Session session = null;
         try {
             session = HibernateUtil.openSession();
-            return (Usuario) session.getNamedQuery("USUARIO.findById").setParameter("id", id).uniqueResult();
+            return (Empresa) session.getNamedQuery("EMPRESA.findById").setParameter("id", id).uniqueResult();
         }catch (NoResultException e) {
             return null;
         }finally {
@@ -147,13 +139,12 @@ public class UsuarioDao implements DaoInterface<Usuario> {
             }
         }
     }
-
-    public Usuario findByEmail(String email) {
+    public Empresa findByName(String nome) {
         Session session = null;
         try {
             session = HibernateUtil.openSession();
-            return (Usuario) session.getNamedQuery("USUARIO.findByEmail").
-                    setParameter("email", email).uniqueResult();
+            return (Empresa) session.getNamedQuery("EMPRESA.findByName").
+                    setParameter("nome", nome).uniqueResult();
         }catch (NoResultException e) {
             return null;
         }finally {
@@ -162,12 +153,12 @@ public class UsuarioDao implements DaoInterface<Usuario> {
             }
         }
     }
-    public List<Usuario> findByPermissao(Permissao permissao) {
+    public Empresa findByCnpj(String cnpj) {
         Session session = null;
         try {
             session = HibernateUtil.openSession();
-            return  session.getNamedQuery("USUARIO.findByPermission").
-                    setParameter("permissao", permissao).list();
+            return  (Empresa)session.getNamedQuery("EMPRESA.findByCnpj").
+                    setParameter("cnpj", cnpj).uniqueResult();
         }catch (NoResultException e) {
             return null;
         }finally {

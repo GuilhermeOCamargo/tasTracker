@@ -42,4 +42,19 @@ public class PermissaoDao {
             }
         }
     }
+
+    public Permissao findByName(String nome) {
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            return (Permissao) session.getNamedQuery("PERMISSAO.findByName")
+                    .setParameter("nome", nome).uniqueResult();
+        }catch (NoResultException e) {
+            return null;
+        }finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+    }
 }
