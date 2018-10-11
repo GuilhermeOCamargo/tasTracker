@@ -20,7 +20,7 @@ p {
     border-left: 1px solid #000;
     border-right: 1px solid #000;
     background: #0B0B3B;
-    color: #FFFFFF
+    color: #FFFFFF;
 }
 .borda-inf{
     font-weight: bold;
@@ -62,4 +62,11 @@ background: #F5F5F5;
 /* Hide all steps by default: */
 .tab {
   display: none;
+}
+.excluirLink{
+    color: #DF0101;
+}
+.center{
+    margin-left:auto;
+    margin-right:auto;
 }

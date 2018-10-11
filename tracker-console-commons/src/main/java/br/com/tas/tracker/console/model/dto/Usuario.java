@@ -16,7 +16,9 @@ import javax.persistence.*;
         /*FIND BY ID*/
         @NamedQuery(name = "USUARIO.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
         /*FIND BY E-MAIL*/
-        @NamedQuery(name = "USUARIO.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
+        @NamedQuery(name = "USUARIO.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
+        /*FIND BY PERMISSION*/
+        @NamedQuery(name = "USUARIO.findByPermission", query = "SELECT u FROM Usuario u WHERE u.permissao = :permissao")
 })
 @Entity
 public class Usuario {

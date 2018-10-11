@@ -27,4 +27,8 @@ public class PermissaoService {
         log.info("Buscando permissão por id: "+ id);
         return permissaoDao.findById(id);
     }
+    public Permissao findByName(String name){
+        log.info("Buscando permissão por nome: "+ name);
+        return permissaoDao.findByName(name);
+    }
 }

@@ -37,7 +37,8 @@ public class UsuarioController {
      * */
     @RequestMapping(value = "/usuario/list", method = RequestMethod.GET)
     public String showFormUsuario(UsuarioForm usuarioForm, Model model, @ModelAttribute("css") String css, @ModelAttribute("mensagem") String mensagem) {
-        model = prepareForm(model, usuarioForm);
+        prepareList(model);
+        prepareForm(model, usuarioForm);
         model.addAttribute("css", css);
         model.addAttribute("mensagem", mensagem);
         return "main";
@@ -50,23 +51,24 @@ public class UsuarioController {
         logger.info("Iniciando ação saveUsuario");
         if(result.hasErrors()){
             logger.error("Erros encontrados: "+ result.getErrorCount());
-            model = prepareForm(model, usuarioForm);
+            prepareList(model);
+            prepareForm(model, usuarioForm);
             return "main";
         }
         try{
             Usuario usuario = usuarioForm.build(permissaoService.findById(usuarioForm.getPermissaoId()));
             if(userService.save(usuario)){
                 logger.info("Salvo com sucesso.");
-                model = prepareForm(model, null);
                 redirectAttributes.addFlashAttribute("css", "success");
                 redirectAttributes.addFlashAttribute("mensagem", "Salvo com sucesso.");
                 return "redirect:list";
             }
         }catch (Exception e){
         }
-        model = prepareForm(model, usuarioForm);
-        redirectAttributes.addFlashAttribute("css", "error");
-        redirectAttributes.addFlashAttribute("mensagem", "Erro ao salvar.");
+        prepareList(model);
+        prepareForm(model, usuarioForm);
+        model.addAttribute("css", "danger");
+        model.addAttribute("mensagem", "Erro ao salvar.");
         return "main";
     }
     /**
@@ -83,12 +85,12 @@ public class UsuarioController {
         }
 
         if(usuario == null){
-            model = prepareForm(model, null);
             model.addAttribute("css", "error");
             model.addAttribute("mensagem", "Usuário não encontrado.");
-            return "forward:usuario";
+            return "redirect:list";
         }
-        model = prepareForm(model, usuario.toForm());
+        prepareForm(model, usuario.toForm());
+        prepareList(model);
         return "main";
     }
     /**
@@ -106,7 +108,7 @@ public class UsuarioController {
         model.addAttribute("cssButton", "danger");
         model.addAttribute("linkConfirm", "/usuario/delete/"+id);
         model.addAttribute("userToDelete", usuario);
-        return "Shared/modalConfirm";
+        return "Modal/modalConfirm";
     }
     /**
      * Deleta o usuário
@@ -126,11 +128,17 @@ public class UsuarioController {
     /**
      * Prepara o form de usuários
      * */
-    private Model prepareForm(Model model, UsuarioForm usuarioForm){
+    private void prepareForm(Model model, UsuarioForm usuarioForm){
         model.addAttribute("usuarioForm", (usuarioForm == null ? new UsuarioForm():usuarioForm));
-        model.addAttribute("usuarios", userService.findAll());
         model.addAttribute("permissoes", permissaoService.findAll());
+
+    }
+    /**
+     * Prepara a lista de usuários
+     * */
+    private void prepareList(Model model){
+        model.addAttribute("usuarios", userService.findAll());
         model.addAttribute("urlBody", "usuario");
-        return model;
+        model.addAttribute("pageTitle", "Usuários");
     }
 }

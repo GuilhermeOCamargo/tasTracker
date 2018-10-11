@@ -1,44 +1,43 @@
 package br.com.tas.tracker.console.validators.impl;
 
-import br.com.tas.tracker.console.model.dto.Usuario;
-import br.com.tas.tracker.console.services.UsuarioService;
-import br.com.tas.tracker.console.validators.annotations.EmailUniqueValid;
+import br.com.tas.tracker.console.model.dto.Empresa;
+import br.com.tas.tracker.console.services.EmpresaService;
+import br.com.tas.tracker.console.validators.annotations.CnpjUniqueValid;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
 /**
  * @author guilherme.camargo
- * @since 23/09/2018
+ * @since 11/10/2018
  * @version 1.0
  * */
-public class EmailUniqueValidator implements ConstraintValidator<EmailUniqueValid, Object> {
+public class CnpjUniqueValidator implements ConstraintValidator<CnpjUniqueValid, Object> {
 
     @Autowired
-    private UsuarioService usuarioService;
-    private String email;
-    private String message;
-    private String id;
+    private EmpresaService empresaService;
+    private String cnpj, message, id;
 
     @Override
-    public void initialize(EmailUniqueValid constraintAnnotation) {
-        this.email = constraintAnnotation.email();
-        this.message = constraintAnnotation.message();
+    public void initialize(CnpjUniqueValid constraintAnnotation) {
+        this.cnpj = constraintAnnotation.cnpj();
         this.id = constraintAnnotation.id();
+        this.message = constraintAnnotation.message();
     }
 
     @Override
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
         boolean result = true;
         try{
-            final String email = BeanUtils.getProperty(o, this.email);
+            final String cnpj = BeanUtils.getProperty(o, this.cnpj);
             final String id = BeanUtils.getProperty(o, this.id);
-            Usuario usuario = usuarioService.findByEmail(email);
-
-            if(usuario != null){
+            Empresa empresa = empresaService.findByCnpj(cnpj.replace(".", "")
+                    .replace("/", "").replace("-", ""));
+            if(empresa != null){
                 if(id != null || !id.isEmpty()){
-                    if(!usuario.getId().equals(Long.parseLong(id))){
+                    if(!empresa.getId().equals(Long.parseLong(id))){
                         result = false;
                     }
                 }
@@ -46,11 +45,10 @@ public class EmailUniqueValidator implements ConstraintValidator<EmailUniqueVali
         }catch (Exception e){
             result = false;
         }
-
         if(!result){
             constraintValidatorContext.disableDefaultConstraintViolation();
             constraintValidatorContext.buildConstraintViolationWithTemplate(message)
-                    .addPropertyNode("email").addConstraintViolation();
+                    .addPropertyNode("cnpj").addConstraintViolation();
         }
         return result;
     }

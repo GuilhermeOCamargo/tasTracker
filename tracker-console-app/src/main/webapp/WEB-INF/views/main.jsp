@@ -15,13 +15,18 @@
         <!-- Our Custom CSS -->
         <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
         <div class="wrapper">
             <c:import url="template_menu.jsp"></c:import>
             <div class="container">
+                <div id="modalContent"></div>
+                <div class="row text-center borda-inf">
+                    <h1>${pageTitle}</h1>
+                </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <c:if test="${not empty mensagem}">

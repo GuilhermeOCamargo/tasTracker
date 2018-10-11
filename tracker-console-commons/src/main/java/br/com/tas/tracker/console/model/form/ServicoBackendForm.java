@@ -5,7 +5,11 @@ import br.com.tas.tracker.console.model.dto.ServicoBackend;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
+/**
+ * @author guilherme.camargo
+ * @since 10/10/2018
+ * @version 1.0
+ **/
 public class ServicoBackendForm extends ServicoBackend {
     @Min(1)
     @Max(4)

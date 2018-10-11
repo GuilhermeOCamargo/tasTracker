@@ -5,9 +5,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<div class="row text-center borda-inf">
-    <h1>Question&aacute;rio</h1>
-</div>
 <div class="row">
     <ul class="breadcrumb">
         <li class="legend"><fmt:message key="message.ativoDispositivo.label"/></li>
@@ -32,19 +29,19 @@
     <form:form method="POST" modelAttribute="questionarioForm" id="formulario" class="form"
     action="${pageContext.servletContext.contextPath}/questionario/save">
         <div class="tab">
-            <c:import url="Shared/formStepAtivDisp.jsp"></c:import>
+            <c:import url="Forms/formStepAtivDisp.jsp"></c:import>
         </div>
         <div class="tab">
-            <c:import url="Shared/formStepComuConect.jsp"></c:import>
+            <c:import url="Forms/formStepComuConect.jsp"></c:import>
         </div>
         <div class="tab">
-            <c:import url="Shared/formStepServBack.jsp"></c:import>
+            <c:import url="Forms/formStepServBack.jsp"></c:import>
         </div>
         <div class="tab">
-            <c:import url="Shared/formStepPadReqReg.jsp"></c:import>
+            <c:import url="Forms/formStepPadReqReg.jsp"></c:import>
         </div>
         <div class="tab">
-            <c:import url="Shared/formStepAmbProj.jsp"></c:import>
+            <c:import url="Forms/formStepAmbProj.jsp"></c:import>
         </div>
     </form:form>
     <!--Fim Formulário-->

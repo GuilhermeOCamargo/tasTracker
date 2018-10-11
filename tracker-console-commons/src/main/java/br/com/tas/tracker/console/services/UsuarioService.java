@@ -1,6 +1,7 @@
 package br.com.tas.tracker.console.services;
 
 import br.com.tas.tracker.console.dao.UsuarioDao;
+import br.com.tas.tracker.console.model.dto.Permissao;
 import br.com.tas.tracker.console.model.dto.Usuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,8 @@ public class UsuarioService {
     private static final Logger log = LoggerFactory.getLogger(UsuarioService.class);
     @Autowired
     private UsuarioDao userDao;
+    @Autowired
+    private PermissaoService permissaoService;
 
     private boolean insert(Usuario usuario) {
         log.info("Inserindo usuário: "+ usuario.getNome());
@@ -53,6 +56,11 @@ public class UsuarioService {
     public Usuario findByEmail(String email){
         log.info("Buscando usuário por E-mail: " +email);
         return userDao.findByEmail(email);
+    }
+
+    public List<Usuario> findAllEmpresas(){
+        log.info("Buscando usuários com perfil de empresa");
+        return userDao.findByPermissao(permissaoService.findByName("Empresa"));
     }
 
     /**
