@@ -8,6 +8,14 @@
         <!-- Class Mappings -->
         <mapping class="br.com.tas.tracker.console.model.dto.Permissao"></mapping>
         <mapping class="br.com.tas.tracker.console.model.dto.Usuario"></mapping>
+
+        <mapping class="br.com.tas.tracker.console.model.dto.AmbienteProjeto"></mapping>
+        <mapping class="br.com.tas.tracker.console.model.dto.AtivosDevices"></mapping>
+        <mapping class="br.com.tas.tracker.console.model.dto.ComunicacaoConectividade"></mapping>
+        <mapping class="br.com.tas.tracker.console.model.dto.PadraoReqRegulatorio"></mapping>
+        <mapping class="br.com.tas.tracker.console.model.dto.ServicoBackend"></mapping>
+        <mapping class="br.com.tas.tracker.console.model.dto.Questionario"></mapping>
+
         <mapping class="br.com.tas.tracker.console.model.dto.Empresa"></mapping>
     </session-factory>
 

@@ -28,6 +28,11 @@
                             Excluir
                     </a>
                 </td>
+                <td>
+                    <a href="${pageContext.servletContext.contextPath}/empresa/createQuestionario/${emp.id}" role="button"> <i class="glyphicon glyphicon-list-alt"></i>
+                            Criar Questionário
+                    </a>
+                </td>
             </tr>
         </c:forEach>
     </tbody>

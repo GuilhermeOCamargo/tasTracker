@@ -1,6 +1,7 @@
 package br.com.tas.tracker.console.controller;
 
 import br.com.tas.tracker.console.model.dto.Empresa;
+import br.com.tas.tracker.console.model.dto.Questionario;
 import br.com.tas.tracker.console.model.dto.Usuario;
 import br.com.tas.tracker.console.model.form.EmpresaForm;
 import br.com.tas.tracker.console.services.EmpresaService;
@@ -18,7 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-
+/**
+ * @author guilherme.camargo
+ * @since 10/10/2018
+ * @version 1.0
+ * */
 @Controller
 public class EmpresaController {
     private final Logger logger = LoggerFactory.getLogger(EmpresaController.class);
@@ -27,7 +32,9 @@ public class EmpresaController {
     private UsuarioService usuarioService;
     @Autowired
     private EmpresaService empresaService;
-
+    /**
+     * Redireciona para a lista de empresas e formulário
+     * */
     @RequestMapping(value = "/empresa/list", method = RequestMethod.GET)
     public String showEmpresaList(Model model, @ModelAttribute("css") String css, @ModelAttribute("mensagem") String mensagem){
         prepareList(model);
@@ -36,6 +43,9 @@ public class EmpresaController {
         model.addAttribute("mensagem", mensagem);
         return "main";
     }
+    /**
+     * Insere ou altera uma empresa
+     * */
     @RequestMapping(value = "/empresa/save", method = RequestMethod.POST)
     public String saveEmpresa(@ModelAttribute("empresaForm")@Valid EmpresaForm empresaForm, BindingResult result,
                               Model model, RedirectAttributes redirectAttributes){
@@ -62,6 +72,9 @@ public class EmpresaController {
         model.addAttribute("mensagem", "Erro ao salvar.");
         return "main";
     }
+    /**
+     * Prepara para a edição da empresa
+     * */
     @RequestMapping(value = "/empresa/edit/{id}", method = RequestMethod.GET)
     public String prepareEdit(@PathVariable String id, Model model){
         Empresa empresa = null;
@@ -96,10 +109,13 @@ public class EmpresaController {
         model.addAttribute("empresaToDelete", empresa);
         return "Modal/modalConfirmEmpresa";
     }
+    /**
+     * Deleta a empresa
+     * */
     @RequestMapping(value = "/empresa/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes){
         if(!empresaService.deleteById(id)){
-            redirectAttributes.addFlashAttribute("css", "error");
+            redirectAttributes.addFlashAttribute("css", "danger");
             redirectAttributes.addFlashAttribute("mensagem", "Erro ao deletar.");
             return "redirect:/empresa/list";
         }else{
@@ -109,10 +125,36 @@ public class EmpresaController {
         }
     }
 
+    @RequestMapping(value = "/empresa/createQuestionario/{id}")
+    public String createQuestionario(@PathVariable String id, RedirectAttributes redirectAttributes){
+        Boolean isCriado = true;
+        try{
+            isCriado = empresaService.createQuestionario(Long.parseLong(id));
+        }catch (NumberFormatException nfe){
+            nfe.printStackTrace();
+            logger.error("Erro ao converter para Long: "+id);
+            isCriado = false;
+        }
+        if(!isCriado){
+            redirectAttributes.addFlashAttribute("css", "danger");
+            redirectAttributes.addFlashAttribute("mensagem", "Erro ao criar questionário.");
+        }else{
+            redirectAttributes.addFlashAttribute("css", "success");
+            redirectAttributes.addFlashAttribute("mensagem", "Questionário criado com sucesso.");
+        }
+        return "redirect:/empresa/list";
+    }
+
+    /**
+     * Prepara o formulário
+     * */
     private void prepareForm(Model model, EmpresaForm empresaForm){
         model.addAttribute("empresaForm", (empresaForm == null ? new EmpresaForm() : empresaForm));
         model.addAttribute("usuarios", usuarioService.findAllEmpresas());
     }
+    /**
+     * Prepara a lista
+     * */
     private void prepareList(Model model){
         model.addAttribute("empresas", empresaService.findAll());
         model.addAttribute("urlBody", "empresa");
