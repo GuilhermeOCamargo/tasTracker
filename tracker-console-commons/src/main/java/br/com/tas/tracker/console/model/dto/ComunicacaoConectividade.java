@@ -1,9 +1,13 @@
 package br.com.tas.tracker.console.model.dto;
+
+import javax.persistence.*;
+
 /**
  * @author guilherme.camargo
  * @since 09/10/2018
  * @version 1.0
  * */
+@Entity
 public class ComunicacaoConectividade {
 
     private Long id;
@@ -16,6 +20,8 @@ public class ComunicacaoConectividade {
     private Integer larguraBandaRemota;
     private Integer latenciaMaxRemota;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -24,6 +30,7 @@ public class ComunicacaoConectividade {
         this.id = id;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getTecnologiaLocal() {
         return tecnologiaLocal;
     }
@@ -32,6 +39,7 @@ public class ComunicacaoConectividade {
         this.tecnologiaLocal = tecnologiaLocal;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getLarguraBandaLocal() {
         return larguraBandaLocal;
     }
@@ -40,6 +48,7 @@ public class ComunicacaoConectividade {
         this.larguraBandaLocal = larguraBandaLocal;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getLatenciaMaxLocal() {
         return latenciaMaxLocal;
     }
@@ -48,6 +57,7 @@ public class ComunicacaoConectividade {
         this.latenciaMaxLocal = latenciaMaxLocal;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getTecnologiaRemota() {
         return tecnologiaRemota;
     }
@@ -56,6 +66,7 @@ public class ComunicacaoConectividade {
         this.tecnologiaRemota = tecnologiaRemota;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getLarguraBandaRemota() {
         return larguraBandaRemota;
     }
@@ -64,6 +75,7 @@ public class ComunicacaoConectividade {
         this.larguraBandaRemota = larguraBandaRemota;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getLatenciaMaxRemota() {
         return latenciaMaxRemota;
     }
@@ -73,7 +85,7 @@ public class ComunicacaoConectividade {
     }
 
     /**
-     * @param obj - Um usuário
+     * @param obj - Um objeto
      * @return Verdadeiro se o id for igual
      */
     @Override

@@ -3,6 +3,7 @@ package br.com.tas.tracker.console.model.dto;
 import br.com.tas.tracker.console.model.form.EmpresaForm;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author guilherme.camargo
@@ -27,6 +28,8 @@ public class Empresa {
     private String nome;
     private String cnpj;
     private Usuario usuarioResponsavel;
+    private List<Questionario> questionarios;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
@@ -60,6 +63,16 @@ public class Empresa {
 
     public void setUsuarioResponsavel(Usuario usuarioResponsavel) {
         this.usuarioResponsavel = usuarioResponsavel;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(nullable = true)
+    public List<Questionario> getQuestionarios() {
+        return questionarios;
+    }
+
+    public void setQuestionarios(List<Questionario> questionarios) {
+        this.questionarios = questionarios;
     }
 
     public EmpresaForm toForm(){

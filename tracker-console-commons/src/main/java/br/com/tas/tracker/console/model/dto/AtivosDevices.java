@@ -1,7 +1,6 @@
 package br.com.tas.tracker.console.model.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author guilherme.camargo
@@ -10,7 +9,6 @@ import javax.persistence.Id;
  * */
 @Entity
 public class AtivosDevices {
-    @Id
     private Long id;
     /*Geral*/
     private Integer numAtivos;
@@ -31,6 +29,8 @@ public class AtivosDevices {
     private Integer restriAtualHW;
     private Integer restriAtualSW;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -39,6 +39,7 @@ public class AtivosDevices {
         this.id = id;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getNumAtivos() {
         return numAtivos;
     }
@@ -47,6 +48,7 @@ public class AtivosDevices {
         this.numAtivos = numAtivos;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getValorAtiInd() {
         return valorAtiInd;
     }
@@ -55,6 +57,7 @@ public class AtivosDevices {
         this.valorAtiInd = valorAtiInd;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getValorEconAtiAno() {
         return valorEconAtiAno;
     }
@@ -63,6 +66,7 @@ public class AtivosDevices {
         this.valorEconAtiAno = valorEconAtiAno;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getComplexAtivo() {
         return complexAtivo;
     }
@@ -71,6 +75,7 @@ public class AtivosDevices {
         this.complexAtivo = complexAtivo;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getHeteroAtivo() {
         return heteroAtivo;
     }
@@ -79,6 +84,7 @@ public class AtivosDevices {
         this.heteroAtivo = heteroAtivo;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getLogNegLocal() {
         return logNegLocal;
     }
@@ -87,6 +93,7 @@ public class AtivosDevices {
         this.logNegLocal = logNegLocal;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getProcessLocalEven() {
         return processLocalEven;
     }
@@ -95,6 +102,7 @@ public class AtivosDevices {
         this.processLocalEven = processLocalEven;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getRequiTempReal() {
         return requiTempReal;
     }
@@ -103,6 +111,7 @@ public class AtivosDevices {
         this.requiTempReal = requiTempReal;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getGerenciaLocalDados() {
         return gerenciaLocalDados;
     }
@@ -111,6 +120,7 @@ public class AtivosDevices {
         this.gerenciaLocalDados = gerenciaLocalDados;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getSupriEnergia() {
         return supriEnergia;
     }
@@ -119,6 +129,7 @@ public class AtivosDevices {
         this.supriEnergia = supriEnergia;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getAmbiente() {
         return ambiente;
     }
@@ -127,6 +138,7 @@ public class AtivosDevices {
         this.ambiente = ambiente;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getTempVidaAtivo() {
         return tempVidaAtivo;
     }
@@ -135,6 +147,7 @@ public class AtivosDevices {
         this.tempVidaAtivo = tempVidaAtivo;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getRestriAtualHW() {
         return restriAtualHW;
     }
@@ -143,6 +156,7 @@ public class AtivosDevices {
         this.restriAtualHW = restriAtualHW;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getRestriAtualSW() {
         return restriAtualSW;
     }

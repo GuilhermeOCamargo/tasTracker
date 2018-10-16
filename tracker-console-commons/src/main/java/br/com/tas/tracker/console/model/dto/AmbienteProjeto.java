@@ -1,15 +1,22 @@
 package br.com.tas.tracker.console.model.dto;
+
+import javax.persistence.*;
+
 /**
  * @author guilherme.camargo
  * @since 10/10/2018
  * @version 1.0
  * */
+@Entity
 public class AmbienteProjeto {
-    private Long id;
     private Integer tempo;
     private Integer orcamento;
     private Integer habFuncExp;
     private Integer habTecExp;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     public Long getId() {
         return id;
@@ -19,6 +26,7 @@ public class AmbienteProjeto {
         this.id = id;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getTempo() {
         return tempo;
     }
@@ -27,6 +35,7 @@ public class AmbienteProjeto {
         this.tempo = tempo;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getOrcamento() {
         return orcamento;
     }
@@ -35,6 +44,7 @@ public class AmbienteProjeto {
         this.orcamento = orcamento;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getHabFuncExp() {
         return habFuncExp;
     }
@@ -43,6 +53,7 @@ public class AmbienteProjeto {
         this.habFuncExp = habFuncExp;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getHabTecExp() {
         return habTecExp;
     }

@@ -7,7 +7,7 @@
       <li class=""><a href="#">Dashboard</a></li>
       <li><a href="${pageContext.servletContext.contextPath}/usuario/list">Usu&aacute;rios</a></li>
       <li><a href="${pageContext.servletContext.contextPath}/empresa/list">Empresa</a></li>
-      <li><a href="${pageContext.servletContext.contextPath}/questionario/form">Question&aacute;rio</a></li>
+      <li><a href="${pageContext.servletContext.contextPath}/questionario/pendencia">Question&aacute;rio</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>

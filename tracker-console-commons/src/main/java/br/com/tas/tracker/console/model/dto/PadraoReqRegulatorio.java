@@ -1,9 +1,13 @@
 package br.com.tas.tracker.console.model.dto;
+
+import javax.persistence.*;
+
 /**
  * @author guilherme.camargo
  * @since 10/10/2018
  * @version 1.0
  * */
+@Entity
 public class PadraoReqRegulatorio {
 
     private Long id;
@@ -15,6 +19,8 @@ public class PadraoReqRegulatorio {
     private Integer tecnicoPad;
     private Integer funcionalPad;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -23,6 +29,7 @@ public class PadraoReqRegulatorio {
         this.id = id;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getRegionalEsp() {
         return regionalEsp;
     }
@@ -31,6 +38,7 @@ public class PadraoReqRegulatorio {
         this.regionalEsp = regionalEsp;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getIndustriaEsp() {
         return industriaEsp;
     }
@@ -39,6 +47,7 @@ public class PadraoReqRegulatorio {
         this.industriaEsp = industriaEsp;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getTecnologiaEsp() {
         return tecnologiaEsp;
     }
@@ -47,6 +56,7 @@ public class PadraoReqRegulatorio {
         this.tecnologiaEsp = tecnologiaEsp;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getTecnicoPad() {
         return tecnicoPad;
     }
@@ -55,6 +65,7 @@ public class PadraoReqRegulatorio {
         this.tecnicoPad = tecnicoPad;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getFuncionalPad() {
         return funcionalPad;
     }

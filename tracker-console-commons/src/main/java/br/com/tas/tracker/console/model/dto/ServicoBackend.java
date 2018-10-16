@@ -1,9 +1,13 @@
 package br.com.tas.tracker.console.model.dto;
+
+import javax.persistence.*;
+
 /**
  * @author guilherme.camargo
  * @since 09/10/2018
  * @version 1.0
  * */
+@Entity
 public class ServicoBackend {
     private Long id;
     /*Geral*/
@@ -16,6 +20,8 @@ public class ServicoBackend {
     private Integer mudancaSchema;
     private Integer analytics;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -24,6 +30,7 @@ public class ServicoBackend {
         this.id = id;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getEstrategiaApliacacao() {
         return estrategiaApliacacao;
     }
@@ -32,6 +39,7 @@ public class ServicoBackend {
         this.estrategiaApliacacao = estrategiaApliacacao;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getComplexNegocio() {
         return complexNegocio;
     }
@@ -40,6 +48,7 @@ public class ServicoBackend {
         this.complexNegocio = complexNegocio;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getIntegraBackend() {
         return integraBackend;
     }
@@ -48,6 +57,7 @@ public class ServicoBackend {
         this.integraBackend = integraBackend;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getVolumDadosDia() {
         return volumDadosDia;
     }
@@ -56,6 +66,7 @@ public class ServicoBackend {
         this.volumDadosDia = volumDadosDia;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getVariedadeDados() {
         return variedadeDados;
     }
@@ -64,6 +75,7 @@ public class ServicoBackend {
         this.variedadeDados = variedadeDados;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getMudancaSchema() {
         return mudancaSchema;
     }
@@ -72,6 +84,7 @@ public class ServicoBackend {
         this.mudancaSchema = mudancaSchema;
     }
 
+    @Column(nullable = true, length = 1)
     public Integer getAnalytics() {
         return analytics;
     }

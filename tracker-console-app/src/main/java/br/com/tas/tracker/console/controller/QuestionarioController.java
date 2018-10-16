@@ -1,13 +1,17 @@
 package br.com.tas.tracker.console.controller;
 
+import br.com.tas.tracker.console.model.dto.Empresa;
 import br.com.tas.tracker.console.model.form.AtivosDevicesForm;
 import br.com.tas.tracker.console.model.form.QuestionarioForm;
+import br.com.tas.tracker.console.services.EmpresaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,6 +21,9 @@ import javax.validation.Valid;
 @Controller
 public class QuestionarioController {
     Logger logger = LoggerFactory.getLogger(QuestionarioController.class);
+    @Autowired
+    private EmpresaService empresaService;
+
     @RequestMapping(value = "/questionario/form", method = RequestMethod.GET)
     public String showQuestionario(Model model, HttpSession session){
         prepareForm(model, null);
@@ -35,8 +42,6 @@ public class QuestionarioController {
             return "main";
         }
         logger.info("Questionario validado");
-
-
         return "redirect:form";
     }
 
@@ -49,5 +54,4 @@ public class QuestionarioController {
         model.addAttribute("pageTitle", "Questionário");
 
     }
-
 }
