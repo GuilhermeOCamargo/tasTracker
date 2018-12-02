@@ -1,5 +1,7 @@
 package br.com.tas.tracker.console.model.dto;
 
+import br.com.tas.tracker.console.model.form.ServicoBackendForm;
+
 import javax.persistence.*;
 
 /**
@@ -91,5 +93,40 @@ public class ServicoBackend {
 
     public void setAnalytics(Integer analytics) {
         this.analytics = analytics;
+    }
+    /**
+     * Converte para objeto de formulário
+     * */
+    public ServicoBackendForm toForm(){
+        ServicoBackendForm form = new ServicoBackendForm();
+        form.setId(this.getId());
+        return form;
+    }
+    /**
+     * @param form - dados do formulário
+     * Converte o objeto de formulário em um objeto de banco
+     * */
+    public ServicoBackend(ServicoBackendForm form){
+        this.id = form.getId();
+        this.analytics = form.getAnalytics();
+        this.complexNegocio = form.getComplexNegocio();
+        this.estrategiaApliacacao = form.getEstrategiaApliacacao();
+        this.integraBackend = form.getIntegraBackend();
+        this.mudancaSchema = form.getMudancaSchema();
+        this.variedadeDados = form.getVariedadeDados();
+        this.volumDadosDia = form.getVolumDadosDia();
+    }
+    /**
+     * Construtor padrão
+     * */
+    public ServicoBackend(){}
+    /**
+     * @return O resultado do questionário para colocar no gráfico
+     * */
+    public double calcularResultado(){
+        double geral = (this.estrategiaApliacacao + this.complexNegocio + this.integraBackend)/3;
+        double analytics =  (this.volumDadosDia + this.variedadeDados + this.mudancaSchema + this.analytics)/4;
+
+        return (geral + analytics)/2;
     }
 }

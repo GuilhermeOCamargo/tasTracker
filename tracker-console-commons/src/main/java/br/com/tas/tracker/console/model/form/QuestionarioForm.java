@@ -1,7 +1,10 @@
 package br.com.tas.tracker.console.model.form;
 
+import br.com.tas.tracker.console.model.dto.Questionario;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.lang.Long;
 
 /**
  * @author guilherme.camargo
@@ -10,6 +13,9 @@ import javax.validation.constraints.NotNull;
  * */
 public class QuestionarioForm {
 
+    private Long id;
+    private Long dtCriacao;
+    private Long empresaId;
     @NotNull
     @Valid
     private AtivosDevicesForm ativosDevicesForm;
@@ -65,4 +71,29 @@ public class QuestionarioForm {
     public void setAmbienteProjetoForm(AmbienteProjetoForm ambienteProjetoForm) {
         this.ambienteProjetoForm = ambienteProjetoForm;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getDtCriacao() {
+        return dtCriacao;
+    }
+
+    public void setDtCriacao(Long dtCriacao) {
+        this.dtCriacao = dtCriacao;
+    }
+
+    public Long getEmpresaId() {
+        return empresaId;
+    }
+
+    public void setEmpresaId(Long empresaId) {
+        this.empresaId = empresaId;
+    }
+
 }

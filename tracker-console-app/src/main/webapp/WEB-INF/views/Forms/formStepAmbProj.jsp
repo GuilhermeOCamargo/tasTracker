@@ -14,6 +14,7 @@
         <div class="borda-solida text-center">
             <h4>Geral</h4>
         </div>
+        <form:hidden  path="ambienteProjetoForm.id"/>
         <div class="col-xs-6">
             <!--Tempo-->
             <div class="row">

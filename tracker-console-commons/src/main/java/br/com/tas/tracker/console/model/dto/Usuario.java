@@ -18,7 +18,11 @@ import javax.persistence.*;
         /*FIND BY E-MAIL*/
         @NamedQuery(name = "USUARIO.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
         /*FIND BY PERMISSION*/
-        @NamedQuery(name = "USUARIO.findByPermission", query = "SELECT u FROM Usuario u WHERE u.permissao = :permissao")
+        @NamedQuery(name = "USUARIO.findByPermission", query = "SELECT u FROM Usuario u WHERE u.permissao = :permissao"),
+        /*AUTHENTICATE*/
+        @NamedQuery(name = "USUARIO.authenticate", query = "SELECT u FROM Usuario u WHERE u.email = :email AND u.senha = :senha"),
+        /*FIND EXCEPT E-MAIL*/
+        @NamedQuery(name = "USUARIO.findAllExceptLogged", query = "SELECT u FROM Usuario u WHERE u.email <> :email ORDER BY nome")
 })
 @Entity
 public class Usuario {

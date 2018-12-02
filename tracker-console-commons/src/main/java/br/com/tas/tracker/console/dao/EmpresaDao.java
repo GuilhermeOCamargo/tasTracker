@@ -1,6 +1,7 @@
 package br.com.tas.tracker.console.dao;
 
 import br.com.tas.tracker.console.model.dto.Empresa;
+import br.com.tas.tracker.console.model.dto.Usuario;
 import br.com.tas.tracker.console.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -159,6 +160,21 @@ public class EmpresaDao implements DaoInterface<Empresa> {
             session = HibernateUtil.openSession();
             return  (Empresa)session.getNamedQuery("EMPRESA.findByCnpj").
                     setParameter("cnpj", cnpj).uniqueResult();
+        }catch (NoResultException e) {
+            return null;
+        }finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public List<Empresa> findByUsuario(Usuario usuario) {
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            return session.getNamedQuery("EMPRESA.findByUsuario")
+                    .setParameter("usuario", usuario).list();
         }catch (NoResultException e) {
             return null;
         }finally {

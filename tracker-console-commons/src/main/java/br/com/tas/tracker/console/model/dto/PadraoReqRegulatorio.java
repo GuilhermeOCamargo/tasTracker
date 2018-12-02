@@ -1,5 +1,7 @@
 package br.com.tas.tracker.console.model.dto;
 
+import br.com.tas.tracker.console.model.form.PadraoReqRegulatorioForm;
+
 import javax.persistence.*;
 
 /**
@@ -72,5 +74,40 @@ public class PadraoReqRegulatorio {
 
     public void setFuncionalPad(Integer funcionalPad) {
         this.funcionalPad = funcionalPad;
+    }
+    /**
+     * Converte para um objeto de formulário
+     * */
+    public PadraoReqRegulatorioForm toForm(){
+        PadraoReqRegulatorioForm form = new PadraoReqRegulatorioForm();
+        form.setId(this.getId());
+        return form;
+    }
+    /**
+     * @param form - Dados do formulário
+     * Converte o objeto de formulário para um objeto de banco
+     * */
+    public PadraoReqRegulatorio(PadraoReqRegulatorioForm form){
+        this.id = form.getId();
+        this.funcionalPad = form.getFuncionalPad();
+        this.industriaEsp = form.getIndustriaEsp();
+        this.regionalEsp = form.getRegionalEsp();
+        this.tecnicoPad = form.getTecnicoPad();
+        this.tecnologiaEsp = form.getTecnologiaEsp();
+    }
+
+    /**
+     * Construtor padrão
+     * */
+    public PadraoReqRegulatorio(){}
+
+    /**
+     * @return O resultado do questionário para colocar no gráfico
+     * */
+    public double calcularResultado(){
+        double regional = (this.regionalEsp + this.industriaEsp + this.tecnologiaEsp)/3;
+        double tecnico =  (this.tecnicoPad + this.funcionalPad)/2;
+
+        return (regional + tecnico)/2;
     }
 }

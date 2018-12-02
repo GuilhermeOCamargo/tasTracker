@@ -3,6 +3,7 @@ package br.com.tas.tracker.console.services;
 import br.com.tas.tracker.console.dao.EmpresaDao;
 import br.com.tas.tracker.console.model.dto.Empresa;
 import br.com.tas.tracker.console.model.dto.Questionario;
+import br.com.tas.tracker.console.model.dto.Usuario;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,10 @@ public class EmpresaService {
         return empresaDao.findByCnpj(cnpj);
     }
 
+    public List<Empresa> findByUsuario(Usuario usuario) {
+        log.info("Buscando Empresa por usuário: "+ usuario.getNome());
+        return empresaDao.findByUsuario(usuario);
+    }
     /**
      * @param empresa - Empresa a ser salva no banco
      * */
@@ -67,24 +72,4 @@ public class EmpresaService {
             return update(empresa);
         }
     }
-    /**
-     * @param id - Id da empresa
-     * Cria um questionario para a empresa
-     * */
-    public boolean createQuestionario(Long id){
-        Empresa empresa = findById(id);
-        if(empresa == null){
-            return false;
-        }
-        Questionario questionario = new Questionario();
-        if(empresa.getQuestionarios() == null){
-            List<Questionario> questionarios = new ArrayList<>();
-            questionarios.add(questionario);
-            empresa.setQuestionarios(questionarios);
-        }else{
-            empresa.getQuestionarios().add(questionario);
-        }
-        return save(empresa);
-    }
-
 }

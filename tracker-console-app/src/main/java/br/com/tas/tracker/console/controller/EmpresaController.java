@@ -1,10 +1,12 @@
 package br.com.tas.tracker.console.controller;
 
+import br.com.tas.tracker.console.exceptions.QuestionarioExistenteException;
 import br.com.tas.tracker.console.model.dto.Empresa;
 import br.com.tas.tracker.console.model.dto.Questionario;
 import br.com.tas.tracker.console.model.dto.Usuario;
 import br.com.tas.tracker.console.model.form.EmpresaForm;
 import br.com.tas.tracker.console.services.EmpresaService;
+import br.com.tas.tracker.console.services.QuestionarioService;
 import br.com.tas.tracker.console.services.UsuarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +34,8 @@ public class EmpresaController {
     private UsuarioService usuarioService;
     @Autowired
     private EmpresaService empresaService;
+    @Autowired
+    private QuestionarioService questionarioService;
     /**
      * Redireciona para a lista de empresas e formulário
      * */
@@ -129,11 +133,17 @@ public class EmpresaController {
     public String createQuestionario(@PathVariable String id, RedirectAttributes redirectAttributes){
         Boolean isCriado = true;
         try{
-            isCriado = empresaService.createQuestionario(Long.parseLong(id));
+            isCriado = questionarioService.createQuestionario(Long.parseLong(id));
         }catch (NumberFormatException nfe){
             nfe.printStackTrace();
             logger.error("Erro ao converter para Long: "+id);
             isCriado = false;
+        }catch (QuestionarioExistenteException qee){
+            logger.error("Questionário existente");
+            redirectAttributes.addFlashAttribute("css", "danger");
+            redirectAttributes.addFlashAttribute("mensagem", qee.getMessage());
+            return "redirect:/empresa/list";
+
         }
         if(!isCriado){
             redirectAttributes.addFlashAttribute("css", "danger");

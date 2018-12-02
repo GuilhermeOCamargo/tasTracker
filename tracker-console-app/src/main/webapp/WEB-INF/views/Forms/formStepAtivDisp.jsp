@@ -14,6 +14,7 @@
         <div class="borda-solida text-center">
             <h4>Geral</h4>
         </div>
+        <form:hidden  path="ativosDevicesForm.id"/>
         <div class="col-xs-6">
             <!--Inicio Numero de ativos-->
             <div class="row">

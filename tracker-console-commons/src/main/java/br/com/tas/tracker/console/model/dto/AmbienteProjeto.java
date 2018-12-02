@@ -1,5 +1,7 @@
 package br.com.tas.tracker.console.model.dto;
 
+import br.com.tas.tracker.console.model.form.AmbienteProjetoForm;
+
 import javax.persistence.*;
 
 /**
@@ -60,5 +62,34 @@ public class AmbienteProjeto {
 
     public void setHabTecExp(Integer habTecExp) {
         this.habTecExp = habTecExp;
+    }
+    /**
+     * Converte para um objeto de formulário
+     * */
+    public AmbienteProjetoForm toForm(){
+        AmbienteProjetoForm form = new AmbienteProjetoForm();
+        form.setId(this.getId());
+        return form;
+    }
+    /**
+     * @param form - Dados do formulário
+     * Converte o objeto de formulário para um objeto de banco
+     * */
+    public AmbienteProjeto(AmbienteProjetoForm form){
+        this.id = form.getId();
+        this.habFuncExp = form.getHabFuncExp();
+        this.habTecExp = form.getHabTecExp();
+        this.orcamento = form.getOrcamento();
+        this.tempo = form.getTempo();
+    }
+    /**
+     * Construtor padrão
+     * */
+    public AmbienteProjeto(){}
+    /**
+     * @return O resultado do questionário para colocar no gráfico
+     * */
+    public double calcularResultado(){
+        return (this.tempo + this.orcamento + this.habFuncExp + this.habTecExp)/4;
     }
 }

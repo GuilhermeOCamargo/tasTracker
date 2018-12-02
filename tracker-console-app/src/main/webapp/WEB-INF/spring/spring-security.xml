@@ -7,37 +7,40 @@
         http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
     <!-- Custom Authentication provider bean -->
-   <!-- <beans:bean id="customAuthenticationProvider"
-                class=""/>
-    Custom Authentication Handler bean -->
-    <!--<beans:bean id="simpleAuthenticationHandler"
-                class=""/>-->
+    <beans:bean id="customAuthenticationProvider"
+                class="br.com.tas.tracker.console.configuration.CustomAuthenticationProvider"/>
+    <!--Custom Authentication Handler bean -->
+    <beans:bean id="simpleAuthenticationHandler"
+                class="br.com.tas.tracker.console.configuration.SimpleAuthenticationHandler"/>
 
     <!-- Authentication Manager Declaration -->
-    <!--<authentication-manager id="authenticationManager">
+    <authentication-manager id="authenticationManager">
         <authentication-provider ref="customAuthenticationProvider"/>
-    </authentication-manager>-->
+    </authentication-manager>
 
     <!-- Permitir css e js para todos -->
-    <!--<http pattern="/css/**" security="none"/>
-    <http pattern="/js/**" security="none"/>-->
+    <http pattern="/css/**" security="none"/>
+    <http pattern="/js/**" security="none"/>
 
     <!-- Adicionar urls para interceptar-->
-   <!-- <http auto-config="true" use-expressions="true" authentication-manager-ref="authenticationManager">
+    <!--authentication-manager-ref="authenticationManager"-->
+    <!--auto-config="true"-->
+    <http  use-expressions="true" >
+        <!--<access-denied-handler error-page="/403" />-->
         <intercept-url pattern="/resources/**" access="permitAll"/>
         <intercept-url pattern="/webjars/**" access="permitAll"/>
-
         <intercept-url pattern="/login" access="permitAll"/>
+
         <intercept-url pattern="/**" access="isAuthenticated()"/>
-        <intercept-url pattern="/home" access="hasAnyRole('', '')"/>
-      />
--->
-       <!-- <form-login authentication-success-handler-ref="simpleAuthenticationHandler"
+        <intercept-url pattern="/usuario" access="hasRole('ADMINISTRADOR')"/>
+        <intercept-url pattern="/empresa/**" access="hasRole('ADMINISTRADOR') and hasRole('VISUALIZADOR')"/>
+        <intercept-url pattern="/questionario/**" access="hasRole('EMPRESA')"/>
+
+        <form-login authentication-success-handler-ref="simpleAuthenticationHandler"
                     login-page="/login"
                     always-use-default-target="false"
                     authentication-failure-url="/login?error"/>
         <logout logout-url="/logout"/>
-
         <csrf disabled="true"/>
-    </http>-->
+    </http>
 </beans:beans>

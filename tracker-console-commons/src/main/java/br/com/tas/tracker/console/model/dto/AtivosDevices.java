@@ -1,5 +1,7 @@
 package br.com.tas.tracker.console.model.dto;
 
+import br.com.tas.tracker.console.model.form.AtivosDevicesForm;
+
 import javax.persistence.*;
 
 /**
@@ -28,6 +30,31 @@ public class AtivosDevices {
     private Integer tempVidaAtivo;
     private Integer restriAtualHW;
     private Integer restriAtualSW;
+    /**
+     * Construtor padrão
+     * */
+    public AtivosDevices(){}
+    /**
+     * @param form - AtivosDevicesForm
+     * Recebe um form como parametro e converte para AtivosDevices
+     * */
+    public AtivosDevices(AtivosDevicesForm form){
+        this.id = form.getId();
+        this.numAtivos = form.getNumAtivos();
+        this.valorAtiInd = form.getValorAtiInd();
+        this.valorEconAtiAno = form.getValorEconAtiAno();
+        this.complexAtivo = form.getComplexAtivo();
+        this.heteroAtivo = form.getHeteroAtivo();
+        this.logNegLocal = form.getLogNegLocal();
+        this.processLocalEven = form.getProcessLocalEven();
+        this.requiTempReal = form.getRequiTempReal();
+        this.gerenciaLocalDados = form.getGerenciaLocalDados();
+        this.supriEnergia = form.getSupriEnergia();
+        this.ambiente = form.getAmbiente();
+        this.tempVidaAtivo = form.getTempVidaAtivo();
+        this.restriAtualHW = form.getRestriAtualHW();
+        this.restriAtualSW = form.getRestriAtualSW();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -180,5 +207,21 @@ public class AtivosDevices {
     @Override
     public boolean equals(Object obj) {
         return (getId() == ((AtivosDevices)obj).getId() ? true:false);
+    }
+
+    public AtivosDevicesForm toForm(){
+        AtivosDevicesForm form = new AtivosDevicesForm();
+        form.setId(this.getId());
+        return form;
+    }
+    /**
+     * @return O resultado do questionário para colocar no gráfico
+     * */
+    public double calcularResultado(){
+        double geral = (this.numAtivos + this.valorAtiInd + this.valorEconAtiAno + this.complexAtivo + this.heteroAtivo)/5;
+        double poderProcess = (this.logNegLocal + this.processLocalEven + this.requiTempReal + this.gerenciaLocalDados)/4;
+        double hw = (this.supriEnergia + this.ambiente)/2;
+        double cicloVida = (this.tempVidaAtivo + this.restriAtualHW + this.restriAtualSW)/3;
+        return (geral + poderProcess + hw + cicloVida)/4;
     }
 }

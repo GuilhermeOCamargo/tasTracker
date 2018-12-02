@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 /**
@@ -36,8 +37,9 @@ public class UsuarioController {
      * @return Página com a lista de usuários
      * */
     @RequestMapping(value = "/usuario/list", method = RequestMethod.GET)
-    public String showFormUsuario(UsuarioForm usuarioForm, Model model, @ModelAttribute("css") String css, @ModelAttribute("mensagem") String mensagem) {
-        prepareList(model);
+    public String showFormUsuario(UsuarioForm usuarioForm, Model model, @ModelAttribute("css") String css,
+                                  @ModelAttribute("mensagem") String mensagem, HttpSession session) {
+        prepareList(model, session);
         prepareForm(model, usuarioForm);
         model.addAttribute("css", css);
         model.addAttribute("mensagem", mensagem);
@@ -47,11 +49,12 @@ public class UsuarioController {
      * Salva o usuário
      * */
     @RequestMapping(value = "/usuario/save", method = RequestMethod.POST)
-    public String submit(@ModelAttribute("usuarioForm") @Valid UsuarioForm usuarioForm, BindingResult result, Model model, RedirectAttributes redirectAttributes){
+    public String submit(@ModelAttribute("usuarioForm") @Valid UsuarioForm usuarioForm, BindingResult result,
+                         Model model, RedirectAttributes redirectAttributes, HttpSession session){
         logger.info("Iniciando ação saveUsuario");
         if(result.hasErrors()){
             logger.error("Erros encontrados: "+ result.getErrorCount());
-            prepareList(model);
+            prepareList(model, session);
             prepareForm(model, usuarioForm);
             return "main";
         }
@@ -65,7 +68,7 @@ public class UsuarioController {
             }
         }catch (Exception e){
         }
-        prepareList(model);
+        prepareList(model, session);
         prepareForm(model, usuarioForm);
         model.addAttribute("css", "danger");
         model.addAttribute("mensagem", "Erro ao salvar.");
@@ -75,7 +78,7 @@ public class UsuarioController {
      * Prepara o usuário para ser editado
      * */
     @RequestMapping(value = "/usuario/edit/{id}", method = RequestMethod.GET)
-    public String prepareEdit(@PathVariable String id, Model model){
+    public String prepareEdit(@PathVariable String id, Model model, HttpSession session){
         Usuario usuario = null;
         try{
             usuario = userService.findById(Long.parseLong(id));
@@ -90,7 +93,7 @@ public class UsuarioController {
             return "redirect:list";
         }
         prepareForm(model, usuario.toForm());
-        prepareList(model);
+        prepareList(model, session);
         return "main";
     }
     /**
@@ -136,8 +139,9 @@ public class UsuarioController {
     /**
      * Prepara a lista de usuários
      * */
-    private void prepareList(Model model){
-        model.addAttribute("usuarios", userService.findAll());
+    private void prepareList(Model model, HttpSession session){
+        model.addAttribute("usuarios", userService.findAllExceptLogged(
+                session.getAttribute("loggedUser").toString()));
         model.addAttribute("urlBody", "usuario");
         model.addAttribute("pageTitle", "Usuários");
     }

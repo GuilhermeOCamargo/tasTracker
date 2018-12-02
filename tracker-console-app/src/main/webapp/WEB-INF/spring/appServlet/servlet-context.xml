@@ -42,7 +42,7 @@
     </mvc:interceptors>
 
 
-    <!--<beans:bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+   <!-- <beans:bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
         <beans:property name="interceptors">
             <beans:list>
                 <beans:ref bean="localeChangeInterceptor"/>

@@ -14,6 +14,7 @@
         <div class="borda-solida text-center">
             <h4>Requerimentos Regulatórios</h4>
         </div>
+        <form:hidden  path="padraoReqRegulatorioForm.id"/>
         <div class="col-xs-6">
             <!--Regionais específicos-->
             <div class="row">

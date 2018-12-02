@@ -28,6 +28,9 @@
     <!--Inicio Formulário-->
     <form:form method="POST" modelAttribute="questionarioForm" id="formulario" class="form"
     action="${pageContext.servletContext.contextPath}/questionario/save">
+        <form:hidden  path="id"/>
+        <form:hidden  path="dtCriacao"/>
+        <form:hidden  path="empresaId"/>
         <div class="tab">
             <c:import url="Forms/formStepAtivDisp.jsp"></c:import>
         </div>

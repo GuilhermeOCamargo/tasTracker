@@ -122,4 +122,5 @@ public class AtivosDevicesForm extends AtivosDevices {
     public Integer getRestriAtualSW() {
         return super.getRestriAtualSW();
     }
+
 }

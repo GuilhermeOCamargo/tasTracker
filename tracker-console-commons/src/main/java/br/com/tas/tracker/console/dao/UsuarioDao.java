@@ -176,4 +176,34 @@ public class UsuarioDao implements DaoInterface<Usuario> {
             }
         }
     }
+
+    public Usuario authenticate(String email, String senha) {
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            return (Usuario) session.getNamedQuery("USUARIO.authenticate").
+                    setParameter("email", email).setParameter("senha", senha).uniqueResult();
+        }catch (NoResultException e) {
+            return null;
+        }finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+    }
+
+    public List<Usuario> findAllExceptLogged(String email) {
+        Session session = null;
+        try {
+            session = HibernateUtil.openSession();
+            return  session.getNamedQuery("USUARIO.findAllExceptLogged").
+                    setParameter("email", email).list();
+        }catch (NoResultException e) {
+            return null;
+        }finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+    }
 }

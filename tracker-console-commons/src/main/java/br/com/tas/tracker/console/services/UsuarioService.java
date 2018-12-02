@@ -63,6 +63,16 @@ public class UsuarioService {
         return userDao.findByPermissao(permissaoService.findByName("Empresa"));
     }
 
+    public Usuario authenticate(String email, String senha){
+        log.info("Tentando autenticar o usuário: "+ email);
+        return userDao.authenticate(email, senha);
+    }
+
+    public List<Usuario> findAllExceptLogged(String logged){
+        log.info("Buscando todos os usuário com exceção do usuário logado: "+ logged);
+        return userDao.findAllExceptLogged(logged);
+    }
+
     /**
      * @param usuario - Usuário a ser salvo no banco
      * */

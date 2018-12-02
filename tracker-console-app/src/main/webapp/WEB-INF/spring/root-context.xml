@@ -17,12 +17,11 @@
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
     <!--Beans de serviço-->
-    <!--<bean id="" name=""/>
-    <bean id="" name="" class=""/>
-    -->
+    <bean id="usuarioService" name="usuarioService" class="br.com.tas.tracker.console.services.UsuarioService"/>
+    <bean id="permissaoService" name="permissaoService" class="br.com.tas.tracker.console.services.PermissaoService"/>
 
     <!--Beans de DAO-->
-    <!--<bean id="" name="" class=""/>
-    -->
+    <bean id="userDao" name="userDao" class="br.com.tas.tracker.console.dao.UsuarioDao"/>
+    <bean id="permissaoDao" name="permissaoDao" class="br.com.tas.tracker.console.dao.PermissaoDao"/>
 
 </beans>

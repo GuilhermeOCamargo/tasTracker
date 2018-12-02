@@ -20,7 +20,9 @@ import java.util.List;
         /*FIND BY NAME*/
         @NamedQuery(name = "EMPRESA.findByName", query = "SELECT e FROM Empresa e WHERE e.nome = :nome"),
         /*FIND BY CNPJ*/
-        @NamedQuery(name = "EMPRESA.findByCnpj", query = "SELECT e FROM Empresa e WHERE e.cnpj = :cnpj")
+        @NamedQuery(name = "EMPRESA.findByCnpj", query = "SELECT e FROM Empresa e WHERE e.cnpj = :cnpj"),
+        /*FIND BY USUARIO*/
+        @NamedQuery(name = "EMPRESA.findByUsuario", query = "SELECT e FROM Empresa e WHERE e.usuarioResponsavel = :usuario")
 })
 @Entity
 public class Empresa {
@@ -28,7 +30,6 @@ public class Empresa {
     private String nome;
     private String cnpj;
     private Usuario usuarioResponsavel;
-    private List<Questionario> questionarios;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,16 +64,6 @@ public class Empresa {
 
     public void setUsuarioResponsavel(Usuario usuarioResponsavel) {
         this.usuarioResponsavel = usuarioResponsavel;
-    }
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(nullable = true)
-    public List<Questionario> getQuestionarios() {
-        return questionarios;
-    }
-
-    public void setQuestionarios(List<Questionario> questionarios) {
-        this.questionarios = questionarios;
     }
 
     public EmpresaForm toForm(){

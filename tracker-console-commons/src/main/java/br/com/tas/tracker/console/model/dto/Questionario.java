@@ -1,5 +1,7 @@
 package br.com.tas.tracker.console.model.dto;
 
+import br.com.tas.tracker.console.model.form.QuestionarioForm;
+
 import javax.persistence.*;
 import java.util.Calendar;
 
@@ -8,6 +10,15 @@ import java.util.Calendar;
  * @since 08/10/2018
  * @version 1.0
  * */
+@NamedQueries({
+        @NamedQuery(name = "QUESTIONARIO.findById", query = "SELECT q FROM Questionario q WHERE q.id = :id"),
+        @NamedQuery(name = "QUESTIONARIO.findByEmpresa", query = "SELECT q FROM Questionario q WHERE q.empresa = :empresa ORDER BY dtCriacao"),
+        @NamedQuery(name = "QUESTIONARIO.findByEmpresaPending", query = "SELECT q FROM Questionario q WHERE q.empresa = :empresa " +
+                "AND q.dtResposta IS NULL"),
+        @NamedQuery(name = "QUESTIONARIO.findByEmpresaAnswered", query = "SELECT q FROM Questionario q WHERE q.empresa = :empresa " +
+                "AND q.dtResposta IS NOT NULL ORDER BY dtCriacao")
+
+})
 @Entity
 public class Questionario {
     private Long id;
@@ -18,15 +29,7 @@ public class Questionario {
     private AmbienteProjeto ambienteProjeto;
     private Calendar dtCriacao;
     private Calendar dtResposta;
-
-    public Questionario(){
-        this.ativosDevices = new AtivosDevices();
-        this.comunicacaoConectividade = new ComunicacaoConectividade();
-        this.servicoBackend = new ServicoBackend();
-        this.padraoReqRegulatorio = new PadraoReqRegulatorio();
-        this.ambienteProjeto = new AmbienteProjeto();
-        this.dtCriacao = Calendar.getInstance();
-    }
+    private Empresa empresa;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -93,12 +96,12 @@ public class Questionario {
     public Calendar getDtCriacao() {
         return dtCriacao;
     }
-    @Temporal(TemporalType.DATE)
-    @Column(nullable = true)
+
     public void setDtCriacao(Calendar dtCriacao) {
         this.dtCriacao = dtCriacao;
     }
-
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = true)
     public Calendar getDtResposta() {
         return dtResposta;
     }
@@ -106,4 +109,60 @@ public class Questionario {
     public void setDtResposta(Calendar dtResposta) {
         this.dtResposta = dtResposta;
     }
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    /**
+     * Converte o Questionário em um form
+     * */
+    public QuestionarioForm toForm(){
+        QuestionarioForm form = new QuestionarioForm();
+        form.setAtivosDevicesForm(this.getAtivosDevices().toForm());
+        form.setComunicacaoConectividadeForm(this.getComunicacaoConectividade().toForm());
+        form.setServicoBackendForm(this.getServicoBackend().toForm());
+        form.setPadraoReqRegulatorioForm(this.getPadraoReqRegulatorio().toForm());
+        form.setAmbienteProjetoForm(this.getAmbienteProjeto().toForm());
+        form.setId(this.getId());
+        form.setDtCriacao(this.getDtCriacao().getTimeInMillis());
+        form.setEmpresaId(this.getEmpresa().getId());
+        return form;
+    }
+    /**
+     * Construtor que recebe uma empresa como parametro
+     * */
+    public Questionario(Empresa empresa){
+        this.ativosDevices = new AtivosDevices();
+        this.comunicacaoConectividade = new ComunicacaoConectividade();
+        this.servicoBackend = new ServicoBackend();
+        this.padraoReqRegulatorio = new PadraoReqRegulatorio();
+        this.ambienteProjeto = new AmbienteProjeto();
+        this.dtCriacao = Calendar.getInstance();
+        this.empresa = empresa;
+    }
+    /**
+     * Construtor que transforma um form em um Questionario
+     * */
+    public Questionario(QuestionarioForm form, Empresa empresa){
+        this.id = form.getId();
+        Calendar dtCriacao = Calendar.getInstance();
+        dtCriacao.setTimeInMillis(form.getDtCriacao());
+        this.dtCriacao = dtCriacao;
+        this.empresa = empresa;
+        this.ativosDevices = new AtivosDevices(form.getAtivosDevicesForm());
+        this.comunicacaoConectividade = new ComunicacaoConectividade(form.getComunicacaoConectividadeForm());
+        this.servicoBackend = new ServicoBackend(form.getServicoBackendForm());
+        this.padraoReqRegulatorio = new PadraoReqRegulatorio(form.getPadraoReqRegulatorioForm());
+        this.ambienteProjeto = new AmbienteProjeto(form.getAmbienteProjetoForm());
+        this.dtResposta = Calendar.getInstance();
+    }
+    /**
+     * Construtor padrão
+     * */
+    public Questionario(){}
 }

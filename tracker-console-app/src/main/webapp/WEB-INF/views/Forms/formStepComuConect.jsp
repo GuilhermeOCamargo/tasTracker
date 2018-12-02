@@ -14,6 +14,7 @@
         <div class="borda-solida text-center">
             <h4>C&C Local</h4>
         </div>
+        <form:hidden  path="comunicacaoConectividadeForm.id"/>
         <div class="col-xs-6">
             <!--Tecnologia-->
             <div class="row">

@@ -1,5 +1,7 @@
 package br.com.tas.tracker.console.model.dto;
 
+import br.com.tas.tracker.console.model.form.ComunicacaoConectividadeForm;
+
 import javax.persistence.*;
 
 /**
@@ -19,6 +21,7 @@ public class ComunicacaoConectividade {
     private Integer tecnologiaRemota;
     private Integer larguraBandaRemota;
     private Integer latenciaMaxRemota;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -91,5 +94,39 @@ public class ComunicacaoConectividade {
     @Override
     public boolean equals(Object obj) {
         return (getId() == ((ComunicacaoConectividade) obj).getId() ? true : false);
+    }
+    /**
+     * Converte para um form
+     * */
+    public ComunicacaoConectividadeForm toForm(){
+        ComunicacaoConectividadeForm form = new ComunicacaoConectividadeForm();
+        form.setId(this.getId());
+        return form;
+    }
+    /**
+     * @param form - Dados do formulário
+     * Recebe os dados de um formulário e converte para Um objeto de banco
+     * */
+    public ComunicacaoConectividade(ComunicacaoConectividadeForm form){
+        this.id = form.getId();
+        this.larguraBandaLocal = form.getLarguraBandaLocal();
+        this.larguraBandaRemota = form.getLarguraBandaRemota();
+        this.latenciaMaxLocal = form.getLatenciaMaxLocal();
+        this.latenciaMaxRemota = form.getLatenciaMaxRemota();
+        this.tecnologiaLocal = form.getTecnologiaLocal();
+        this.tecnologiaRemota = form.getTecnologiaRemota();
+    }
+    /**
+     * Construtor padrão
+     * */
+    public ComunicacaoConectividade(){}
+    /**
+     * @return O resultado do questionário para colocar no gráfico
+     * */
+    public double calcularResultado(){
+        double local = (this.tecnologiaLocal + this.larguraBandaLocal + this.latenciaMaxLocal)/3;
+        double remota =  (this.tecnologiaRemota + this.larguraBandaRemota + this.latenciaMaxRemota)/3;
+
+        return (local + remota)/2;
     }
 }
