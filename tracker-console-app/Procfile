@@ -1,1 +1,2 @@
 web: java -jar -Dserver.port=$PORT target/tracker-console.war
+web: java $JAVA_OPTS -cp target/classes:target/dependency/* tracker-console
