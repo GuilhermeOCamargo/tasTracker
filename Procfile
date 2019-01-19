@@ -1,0 +1,1 @@
+web: java -jar -Dserver.port=$PORT tracker-console-app/target/tracker-console.war
