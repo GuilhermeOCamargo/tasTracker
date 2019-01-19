@@ -24,6 +24,7 @@ import javax.validation.Valid;
  * @version 1.0
  * */
 @Controller
+
 public class UsuarioController {
 
     private final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
